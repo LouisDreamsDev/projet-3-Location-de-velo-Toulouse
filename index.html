@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src='hello.js'></script>
+	<script src="https://kit.fontawesome.com/8b0d9e11b7.js" crossorigin="anonymous"></script>
+	<title>Toulouse Loc'Velo</title>
+</head>
+<body>
+<div id="div-all">
+	<!-- en tete fixe avec navigation -->
+	<header>
+		<a href="" id="logo-clic"><img src="img/velo-toulouse-img1.jpg" alt="Logo du site clicable"></a>
+		<nav id="menu-navigation">
+			<ul class="list-nav">
+				<li><a href="#slider" class="item">Slider</a></li>
+				<li><a href="#velo-map" class="item">Map</a></li>
+				<li><a href="#footer" class="item">About</a></li>
+			</ul>
+		</nav>
+	</header>
+	<!-- titre principal -->
+	<h1 id="main-title">Velo Toulouse</h1>
+	<!-- slider section -->
+	<section id="slider">
+		<h2 id="slider-title">Slider</h2>
+		<!-- Slider en HTML / CSS / JS -->
+	<!-- ****Consigne**** -->
+	<!--
+	Le diaporama passe automatiquement à la diaporama suivante toutes les 5 secondes.
+	L’utilisateur peut toutefois choisir de mettre le diaporama en pause.
+	Il peut également reculer ou avancer manuellement à l’aide d’un clic de souris,
+	ainsi qu’avec les touches gauche et droite de son clavier.
+	-->
+	<!-- conseils du mentor =
+		- les boutons pause/stop doivent etre interactifs
+		avec none et l'autre en block intervertion avec le JS -->
+		<div class="slider-container">
+     	<div id="image-slider"></div>
+				<span id="left-arrow"><i class="fas fa-caret-left"></i></span>
+				<span id="right-arrow"><i class="fas fa-caret-right"></i></span>
+       	<figure id="slider-image-1">
+        	<img class="slider-image" src="img/velo-toulouse1.jpg" alt="">
+        	<figcaption>instruction image 1</figcaption>
+        </figure>
+        <figure id="slider-image-2">
+        	<img class="slider-image" src="img/velo-toulouse2.jpg" alt="">
+        	<figcaption>Instruction image 2</figcaption>
+        </figure>
+        <figure id="slider-image-3">
+        	<img class="slider-image" src="img/velo-toulouse3.jpg" alt="">
+        	<figcaption>Instruction image 3</figcaption>
+        </figure>
+        <figure id="slider-image-4">
+        	<img class="slider-image" src="img/velo-toulouse4.jpg" alt="">
+        	<figcaption>Instruction image 4</figcaption>
+        </figure>
+        <figure id="slider-image-5">
+        	<img class="slider-image" src="img/velo-toulouse5.jpg" alt="">
+        	<figcaption>Instruction image 5</figcaption>
+        </figure>
+			</div>
+			<span id="play-button"><i class="fas fa-play"></i></span>
+			<span id="stop-button"><i class="fas fa-pause"></i></span>
+		</div>
+	</section>
+
+	<!-- section de la carte interactive -->
+	<!-- consigne =  -->
+	<!-- conseils du mentor =  -->
+
+	<section id="velo-map">
+		<h2 id="map-title">Map</h2>
+		<div id="carte"></div>
+		<!-- API Cartographie -->
+		<div id="info-station"></div>
+			<h3>Informations de la station</h3>
+			<div id="statut-ok">Statut de la station : <span id="statut-station"></span></div>
+			<div id="station-name">Nom de la station : <span id="station-name"></span></div>
+			<div id="station-adress">Adresse de la station : <span id="station-adress"></span> </div>
+			<div id="station-potential">Nombre de places totales : <span id="station-potential"></span></div>
+			<div id="station-dispo">Nombre de velos disponibles : <span id="station-dispo"></span></div>
+			<button id="name-button"><!-- local.storage = x --></button>
+			<button id="firstname-button"><!-- local.storage = x --></button>
+			<div id="canvas">
+				<canvas id="signature"></canvas>
+				<span id="reset-button">info avec hover<i class="fas fa-redo"></i></span>
+				<span id="cancel-button">info avec hover<i class="fas fa-times"></i></span>
+				<span id="valid-button">info avec hover<i class="fas fa-check"></i	></span>
+				<button></button>
+			</div>
+	</section>
+
+	<section id="pre-footer">
+
+	<p>la reservation du velo a la station <span id="station-name"></span> a l'adresse <span id="station-adress"></span> par <span id="name-storage"></span> temps restant : <span id="timer"></span></p>
+
+	</section>
+	<!-- Pied de page -->
+	<footer id="footer">
+		<h2>About</h2>
+		<p id="legals"></p>
+		<span class="social-icon"><i></i></span>
+		<span class="social-icon"><i></i></span>
+		<span class="social-icon"><i></i></span>
+		<span class="social-icon"><i></i></span>
+		<p id="contact">You can contact us at..</p>
+	</footer>
+</div>
+
+</body>
+</html>
