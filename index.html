@@ -15,7 +15,7 @@
 		<a href="" id="logo-clic"><img src="img/velo-toulouse-img1.jpg" alt="Logo du site clicable"></a>
 		<nav id="menu-navigation">
 			<ul class="list-nav">
-				<li><a href="#slider" class="item">Slider</a></li>
+				<li class="lign-leader"><a href="#slider" class="item1">Slider</a></li>
 				<li><a href="#velo-map" class="item">Map</a></li>
 				<li><a href="#footer" class="item">About</a></li>
 			</ul>
@@ -61,7 +61,6 @@
         	<img class="slider-image" src="img/velo-toulouse5.jpg" alt="">
         	<figcaption>Instruction image 5</figcaption>
         </figure>
-			</div>
 			<span id="play-button"><i class="fas fa-play"></i></span>
 			<span id="stop-button"><i class="fas fa-pause"></i></span>
 		</div>
@@ -75,27 +74,33 @@
 		<h2 id="map-title">Map</h2>
 		<div id="carte"></div>
 		<!-- API Cartographie -->
-		<div id="info-station"></div>
+		<div id="info-station">
 			<h3>Informations de la station</h3>
-			<div id="statut-ok">Statut de la station : <span id="statut-station"></span></div>
-			<div id="station-name">Nom de la station : <span id="station-name"></span></div>
-			<div id="station-adress">Adresse de la station : <span id="station-adress"></span> </div>
-			<div id="station-potential">Nombre de places totales : <span id="station-potential"></span></div>
-			<div id="station-dispo">Nombre de velos disponibles : <span id="station-dispo"></span></div>
-			<button id="name-button"><!-- local.storage = x --></button>
-			<button id="firstname-button"><!-- local.storage = x --></button>
+			<div id="statut-station">Statut de la station : <span id="info-statut-station"></span></div>
+			<div id="station-name">Nom de la station : <span id="info-station-name"></span></div>
+			<div id="station-adress">Adresse de la station : <span id="info-station-adress"></span> </div>
+			<div id="station-potential">Nombre de places totales : <span id="info-station-potential"></span></div>
+			<div id="station-dispo">Nombre de velos disponibles : <span id="info-station-dispo"></span></div>
+			<input id="name-button"><!-- local.storage = x --></input>
+			<input id="firstname-button"><!-- local.storage = x --></input>
 			<div id="canvas">
 				<canvas id="signature"></canvas>
-				<span id="reset-button">info avec hover<i class="fas fa-redo"></i></span>
-				<span id="cancel-button">info avec hover<i class="fas fa-times"></i></span>
-				<span id="valid-button">info avec hover<i class="fas fa-check"></i	></span>
-				<button></button>
+				<button id="reset-button">info avec hover<i class="fas fa-redo"></i></button>
+				<button id="cancel-button">info avec hover<i class="fas fa-times"></i></button>
+				<button id="valid-button">info avec hover<i class="fas fa-check"></i	></button>
 			</div>
+		</div>
 	</section>
 
 	<section id="pre-footer">
 
-	<p>la reservation du velo a la station <span id="station-name"></span> a l'adresse <span id="station-adress"></span> par <span id="name-storage"></span> temps restant : <span id="timer"></span></p>
+	<div id="chat-box">
+		la reservation du velo a la station
+		<span id="chatbox-station-name"></span> a l'adresse
+		<span id="chatbox-station-adress"></span> par
+		<span id="chatbox-name-storage"></span> temps restant :
+		<span id="timer"></span>
+	</div>
 
 	</section>
 	<!-- Pied de page -->
