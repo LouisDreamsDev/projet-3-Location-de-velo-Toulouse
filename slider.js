@@ -1,6 +1,6 @@
-var lesImagesDuSlider = document.getElementsByClassName("slider-image");
-var sliderIndex = 0;
-var auto4s = true;
+let lesImagesDuSlider = document.getElementsByClassName("slider-image");
+let sliderIndex = 0;
+let auto5s = 0;
 diapoAuto();
 
 function diapoAuto() {
@@ -12,8 +12,16 @@ function diapoAuto() {
     sliderIndex = 1;
   }
   lesImagesDuSlider[sliderIndex-1].style.display = "block";
-  auto4s = setTimeout(diapoAuto, 3000);
+  auto5s = setTimeout(diapoAuto, 5000);
 }
 function diapoManuel() {
-  clearTimeout(auto4s);
+  clearTimeout(auto5s)
 }
+
+/*display none le pause;
+display block bouton play;
+
+
+fonction fleche de gauche
+commencer la programmation orientee Object = class constructor et this
+*/
