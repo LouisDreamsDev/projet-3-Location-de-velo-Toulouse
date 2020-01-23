@@ -74,8 +74,7 @@ ul.list-nav li a {
 }
 #main-title {
 	font-size: 4em;
-	display: flex;
-	justify-content: center;
+  text-align: center;
 	margin: 200px 0 40px 0;
 	font-family: '3-dumb', Arial, sans-serif;
 	text-decoration: underline;
@@ -116,7 +115,7 @@ figure figcaption {
 	height: 80px;
 	position: absolute;
 	top: 220px;
-	left: 200px;
+	left: 50px;
 	opacity: 0.8;
 	z-index: 2;
 	border: 4px solid black;
@@ -194,13 +193,15 @@ figure figcaption {
 label {
 	width: 100%;
 }
-
 #canvas {
 	width: 60%;
 	height: 100px;
 	border: 1px solid black;
 	margin: auto;
 	/*display: none;*/
+}
+#signature {
+  width: 180px;
 }
 #canvas-button {
 	display: flex;
@@ -231,57 +232,4 @@ footer h2 {
 #legals {
 	font-size: 0.8em;
 	color: lightgrey;
-}
-
-/*
-[Media queries] => [2] breakpoints = [smartphones] / [tablettes]
-1 colonne pour les smartphones
-display reduit pour les tablettes
-*/
-
-@media only screen and (max-width: 600px) {
-	#div-all {
-		width: auto;
-	}
-	header {
-		height: auto;
-		flex-direction: column;
-		align-items: center;
-	}
-	#logo-clic img {
-		width: 7em;
-	}
-	#menu-navigation ul {
-		flex-direction: column;
-		align-items: center;
-		padding: 0;
-	}
-	#menu-navigation ul li {
-		padding: 18px 0 8px 0;
-	}
-nav#menu-navigation ul.list-nav li.lign-leader {
-		padding: 0px 0 8px 0;
-	}
-	#main-title {
-		margin-top: 330px;
-	}
-	section {
-		margin: 2px;
-		padding: 4px;
-	}
-	.slider-image {
-		margin: auto;
-		width: 300px;
-	}
-	footer {
-		margin: 2px;
-		padding: 4px;
-	}
-}
-
-@media (min-width: 601px) and (max-width: 840px) {
-	.slider-image {
-		margin: auto;
-		width: 300px;
-	}
 }
