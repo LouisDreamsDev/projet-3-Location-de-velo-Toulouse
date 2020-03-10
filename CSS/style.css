@@ -22,7 +22,6 @@ body {
 a, a:active, a:focus {
     outline: none;
 }
-
 input::-moz-focus-inner {
     border: 0;
 }

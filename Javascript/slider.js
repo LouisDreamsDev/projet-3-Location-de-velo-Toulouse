@@ -12,7 +12,6 @@ function autoPlay() {
   deltaT = setInterval(diaporama, 1000);
 }
 function diaporama() {
-  document.getElementById("slider-title").innerHTML = sliderIndex;
   for (i = 0; i < lesImages.length; i++) {
     lesImages[i].style.display = "none";
   }
@@ -32,29 +31,22 @@ function backToAuto() {
   document.getElementById("play-button").style.display="none";
   autoPlay();
 }
-
 // fleche gauche
 function leftArrow() {
   optionManuel();
   for (i = 0; i < lesImages.length; i++) {
     lesImages[i].style.display = "none";
   }
-  sliderIndex--;
-  if (sliderIndex < 0) {
-    sliderIndex = lesImages.length;
+  if (sliderIndex == 0) {
+    sliderIndex = lesImages.length; // bugg meme avec lesImages.length-1 ou length[-1]
+  }
+  else {
+    sliderIndex--;
   }
   lesImages[sliderIndex-1].style.display = "block";
 }
-
 // fleche droite
 function rightArrow() {
  optionManuel();
- for (i = 0; i < lesImages.length; i++) {
-   lesImages[i].style.display = "none";
- }
- sliderIndex++;
- if (sliderIndex > lesImages.length) {
-   sliderIndex = 1;
- }
- lesImages[sliderIndex-1].style.display = "block";
+ diaporama();
 }
