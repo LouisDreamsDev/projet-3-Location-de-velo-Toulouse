@@ -38,12 +38,12 @@ function leftArrow() {
     lesImages[i].style.display = "none";
   }
   if (sliderIndex == 0) {
-    sliderIndex = lesImages.length; // bugg meme avec lesImages.length-1 ou length[-1]
+    sliderIndex = lesImages.length-1; // bugg meme avec lesImages.length-1 ou length[-1]
   }
   else {
     sliderIndex--;
   }
-  lesImages[sliderIndex-1].style.display = "block";
+  lesImages[sliderIndex].style.display = "block";
 }
 // fleche droite
 function rightArrow() {

@@ -1,15 +1,24 @@
+//let lat = 43.60426;
+//let lon = 1.44367;
+//let macarte = null;
+//let zoom = [10, 25];
+
 class Carte {
-  constructor (lat, lon, macarte) {
+  constructor (lat, lon, minZoom, maxZoom) {
     this.lat = lat;
     this.lon = lon;
-    this.macarte = macarte;
-    this.minZoom = 10;
-    this.maxZoom = 25;
+    this.macarte = null;
+    this.minZoom = minZoom;
+    this.maxZoom = maxZoom;
   }
-  initmap() {
-    macarte = L.map('map',{scrollWheelZoom: false}).setView([this.lat, this.lon]);
-    L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',).addTo(macarte);
-  }
+    initmap() {
+      this.macarte = L.map('map',{scrollWheelZoom: false})
+      .setView([this.lat, this.lon, 11]);
+      L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png',{
+        minZoom = 10,
+        maxZoom = 25
+      }).addTo(this.macarte);
+    }
 }
 
 const mapToulouse = new Carte(43.60426, 1.44367, null);
