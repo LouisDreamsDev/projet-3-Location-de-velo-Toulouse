@@ -1,7 +1,6 @@
 // declarations des variables pour le defilement des images du slider
 let lesImages = document.getElementsByClassName("slider-image");
 let sliderIndex = 0, deltaT = 0;
-
 //declarations des variables pour l'utilisation des boutons play / pause
 let playButton = document.getElementById("play-button");
 let stopButton = document.getElementById("stop-button");
@@ -9,7 +8,7 @@ let stopButton = document.getElementById("stop-button");
 autoPlay();
 
 function autoPlay() {
-  deltaT = setInterval(diaporama, 1000);
+  deltaT = setInterval(diaporama, 5000);
 }
 function diaporama() {
   for (i = 0; i < lesImages.length; i++) {
@@ -38,14 +37,13 @@ function leftArrow() {
     lesImages[i].style.display = "none";
   }
   if (sliderIndex == 0) {
-    sliderIndex = lesImages.length-1; // bugg meme avec lesImages.length-1 ou length[-1]
+    sliderIndex = lesImages.length-1; 
   }
   else {
     sliderIndex--;
   }
   lesImages[sliderIndex].style.display = "block";
 }
-// fleche droite
 function rightArrow() {
  optionManuel();
  diaporama();
