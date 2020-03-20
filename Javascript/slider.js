@@ -1,6 +1,6 @@
 // declarations des variables pour le defilement des images du slider
-let lesImages = document.getElementsByClassName("slider-image");
-let sliderIndex = 0, deltaT = 0;
+let images = document.getElementsByClassName("slider-image");
+let sliderIndex = 0, chrono = 0;
 //declarations des variables pour l'utilisation des boutons play / pause
 let playButton = document.getElementById("play-button");
 let stopButton = document.getElementById("stop-button");
@@ -8,41 +8,41 @@ let stopButton = document.getElementById("stop-button");
 autoPlay();
 
 function autoPlay() {
-  deltaT = setInterval(diaporama, 5000);
+  chrono = setInterval(diaporama, 1000);
 }
 function diaporama() {
-  for (i = 0; i < lesImages.length; i++) {
-    lesImages[i].style.display = "none";
+  for (let i = 0; i < images.length; i++) {
+    images[i].style.display = "none";
   }
   sliderIndex++;
-  if (sliderIndex > lesImages.length) {
+  if (sliderIndex > images.length) {
     sliderIndex = 1;
   }
-  lesImages[sliderIndex-1].style.display = "block";
+  images[sliderIndex-1].style.display = "block";
 }
 function optionManuel() {
-  clearInterval(deltaT);
-  document.getElementById("stop-button").style.display="none";
-  document.getElementById("play-button").style.display="block";
+  clearInterval(chrono);
+  stopButton.style.display="none";
+  playButton.style.display="block";
 }
 function backToAuto() {
-  document.getElementById("stop-button").style.display="block";
-  document.getElementById("play-button").style.display="none";
+  stopButton.style.display="block";
+  playButton.style.display="none";
   autoPlay();
 }
 // fleche gauche
 function leftArrow() {
   optionManuel();
-  for (i = 0; i < lesImages.length; i++) {
-    lesImages[i].style.display = "none";
+  for (i = 0; i < images.length; i++) {
+    images[i].style.display = "none";
   }
   if (sliderIndex == 0) {
-    sliderIndex = lesImages.length-1; 
+    sliderIndex = images.length-1; 
   }
   else {
     sliderIndex--;
   }
-  lesImages[sliderIndex].style.display = "block";
+  images[sliderIndex].style.display = "block";
 }
 function rightArrow() {
  optionManuel();
