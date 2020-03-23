@@ -1,39 +1,60 @@
 let lat = 43.60426;
 let lon = 1.44367;
 let zoom = 10;
+let url = "https://api.jcdecaux.com/vls/v1/stations?contract=toulouse&apiKey=110bb2109635584660d15785866f72ba75aa09d8";
+let xhr = new XMLHttpRequest();
 
 class Carte {
   constructor () {
       this.macarte = L.map('map',{scrollWheelZoom: false}).setView([lat, lon], zoom);
       this.tilelayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png').addTo(this.macarte);
-      this.marker = L.marker([lat, lon]).addTo(this.macarte);
   }
+  /*
+  ajaxGet(callback) {
+    this.xhr.onreadystatechange = function() {        
+      if (this.xhr.readyState == 4 && this.xhr.status == 200) {             
+          //console.log(this.xhr.response);
+          this.callback(this.xhr.response);            
+      } 
+      else if (this.xhr.readyState ==! 4 && this.xhr.status ==! 200) {
+          console.log("Chargement.. ou erreur..");
+      }
+    }
+    this.xhr.open("GET", this.url);
+    this.xhr.responseType = "json";
+    this.xhr.send();
 }
-let mapToulouse = new Carte();
+mapMain.ajaxGet(url, function(data) {
+  for(i = 0; i < data.length; i++) {
+    //console.log(data[i].number);
+    let marker = L.marker([data[i].position.lat, data[i].position.lng]).addTo(mapMain.macarte);
+  }
+});
+*/
+}
+let mapMain = new Carte();
 
-function callAPI(url) {
-  let request = new XMLHttpRequest();
-  request.onreadystatechange = function() {
-    if (request.readyState == request.DONE && request.status == 200) {
-      let result = JSON.parse(request.responseText);
-      console.log("OK pour l'API", result.length);
-      return result;
+function ajaxGet(url, callback) {    
+  let xhr = new XMLHttpRequest();    
+  xhr.onreadystatechange = function() {        
+    if (xhr.readyState == 4 && xhr.status == 200) {             
+        //console.log(xhr.response);
+        callback(xhr.response);            
+    } 
+    else if (this.readyState ==! 4 && this.status ==! 200) {
+        console.log("Chargement.. ou erreur..");
     }
   }
-  request.open("GET", url);
-  request.send();
-}
-let stations = callAPI("https://api.jcdecaux.com/vls/v1/stations?contract=toulouse&apiKey=110bb2109635584660d15785866f72ba75aa09d8");
+  xhr.open("GET", url);
+  xhr.responseType = "json";
+  xhr.send();
+};
 
-function displayMarker() {
-  //let lat2 = stations.position.latitude;
-  //let lon2 = stations.position.longitude;
-  for(let i = 0; index < stations.length; i++) {
-  let marker = L.marker([stations.position.lat, stations.position.lon]).addTo(this.macarte);
+ajaxGet(url, function(data) {
+  for(i = 0; i < data.length; i++) {
+    //console.log(data[i].number);
+    let marker = L.marker([data[i].position.lat, data[i].position.lng]).addTo(mapMain.macarte);
   }
-  console.log(marker);
-}
-marker();
-
+});
 
 
