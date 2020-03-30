@@ -68,15 +68,16 @@ ajaxGet(url, function(data) {
     }
     else if(data[i].status === "CLOSED") { // code inutile pour l'instant. l'objectif est d'afficher un marqueur rouge si la sation est fermee.
       //marker = closeIcon;
-    }
-    marker.addEventListener('click', function() {
-      detailsWindow.style.display="block";
-      statutStation = <p></p>
-      stationName = 
-      stationAdress =
-      stationPotential = 
-      stationDispo = 
-    })
+    };
+    //marker.addEventListener('click', function() {
+      //detailsWindow.style.display="block";
+      //statutStation = <p></p>
+      //stationName = 
+      //stationAdress =
+      //stationPotential = 
+      //stationDispo = 
+    //)
+ //}
   }
 });
 /*
