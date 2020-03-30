@@ -52,10 +52,10 @@
         	<figcaption>Bravo ! Votre velo est reserve pour 20 minutes.</figcaption>
         </figure>
 				<div id="slider-bloc-icon">
-					<button class="button-set" id="left-arrow" onclick="mainSlider.leftArrow()"><i class="fas fa-caret-left"></i></button>
-					<button class="button-set" id="stop-button" onclick="mainSlider.optionManuel()"><i class="fas fa-pause"></i></button>
-					<button class="button-set" id="play-button" onclick="mainSlider.backToAuto()"><i class="fas fa-play"></i></button>
-					<button class="button-set" id="right-arrow" onclick="mainSlider.rightArrow()"><i class="fas fa-caret-right"></i></button>
+					<button class="button-set" id="left-arrow" ><i class="fas fa-caret-left"></i></button>
+					<button class="button-set" id="stop-button" onclick="mainSlider.stopSlide()"><i class="fas fa-pause"></i></button>
+					<button class="button-set" id="play-button" onclick="mainSlider.replaySlide()"><i class="fas fa-play"></i></button>
+					<button class="button-set" id="right-arrow"><i class="fas fa-caret-right"></i></button>
 				</div>
 			</div>
 		</div>
@@ -65,7 +65,7 @@
 		<h2 id="map-title">La jolie Carte de Toulouse</h2>
 		<div id="gobal-sec-map">
 			<div id="map"></div>
-			<div id="details-station">
+			<div id="details-window">
 				<h3>Informations sur la station</h3>
 				<hr>
 				<div id="statut-station">Statut de la station : <span id="info-statut-station"></span></div>
@@ -114,9 +114,9 @@
 	</footer>
 </div>
 <!-- appel du slider [js] --><!-- Developement poo -->
-<script type="text/javascript" src="Javascript/slider_test_poo.js"></script>
+<script type="text/javascript" src="Javascript/slider.js"></script>
 <!-- appel de la map [js] --><!-- Developement poo -->
-<script type="text/javascript" src="Javascript/map_test_poo.js"></script>
+<script type="text/javascript" src="Javascript/map.js"></script>
 <!-- appel du canvas [js] -->
 <script type="text/javascript" src="Javascript/canvas.js"></script>
 <!-- dernier appel = fichier principal  >> variables [js] -->

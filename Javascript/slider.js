@@ -1,50 +1,72 @@
-// declarations des variables pour le defilement des images du slider
-let images = document.getElementsByClassName("slider-image");
-let sliderIndex = 0, chrono = 0;
-//declarations des variables pour l'utilisation des boutons play / pause
-let playButton = document.getElementById("play-button");
-let stopButton = document.getElementById("stop-button");
-
-autoPlay();
-
-function autoPlay() {
-  chrono = setInterval(diaporama, 1000);
-}
-function diaporama() {
-  for (let i = 0; i < images.length; i++) {
-    images[i].style.display = "none";
+class Slider {
+  constructor(images, sliderIndex) {
+    this.keydown();
+    this.images = images;
+    this.sliderIndex = sliderIndex;
+    this.playButton = playButton;
+    this.stopButton = stopButton;
+    this.leftButton = leftButton;
+    this.rightButton = rightButton;
+    this.autoPlay();
   }
-  sliderIndex++;
-  if (sliderIndex > images.length) {
-    sliderIndex = 1;
+  keydown() {
+    document.body.addEventListener('keydown', (e) => {
+      if (e.keyCode == 37) {
+        this.leftSlide();
+      }
+      else if (e.keyCode == 39) {
+        this.rightSlide();
+      }
+    })
   }
-  images[sliderIndex-1].style.display = "block";
-}
-function optionManuel() {
-  clearInterval(chrono);
-  stopButton.style.display="none";
-  playButton.style.display="block";
-}
-function backToAuto() {
-  stopButton.style.display="block";
-  playButton.style.display="none";
-  autoPlay();
-}
-// fleche gauche
-function leftArrow() {
-  optionManuel();
-  for (i = 0; i < images.length; i++) {
-    images[i].style.display = "none";
+  clickLeftSlide() {
+    this.leftButton.addEventListener('click', (e) => {
+      this.leftSlide();
+    })
   }
-  if (sliderIndex == 0) {
-    sliderIndex = images.length-1; 
+  clickRightSlide() {
+    this.rightButton.addEventListener('click', (e) => {
+      this.rightSlide();
+    })
   }
-  else {
-    sliderIndex--;
+  diaporama() {
+  for(i = 0; i < this.images.length; i++) {
+    this.images[i].style.display = "none";
   }
-  images[sliderIndex].style.display = "block";
-}
-function rightArrow() {
- optionManuel();
- diaporama();
+  this.sliderIndex++;
+  if (this.sliderIndex > this.images.length) {
+    this.sliderIndex = 1;
+  }
+  this.images[this.sliderIndex-1].style.display = "block";
+  }
+  stopSlide() {
+    clearInterval(this.chrono);
+    this.stopButton.style.display="none";
+    this.playButton.style.display="block";
+  }
+  replaySlide() {
+    stopButton.style.display="block";
+    playButton.style.display="none";
+    this.autoPlay();
+  }
+  leftSlide() {
+    this.stopSlide();
+    for (i = 0; i < this.images.length; i++) {
+      this.images[i].style.display = "none";
+    }
+    if (this.sliderIndex == 0) {
+      this.sliderIndex = this.images.length-1; 
+    }
+    else {
+      this.sliderIndex--;
+    }
+    this.images[this.sliderIndex].style.display = "block";
+  }
+  rightSlide() {
+    this.stopSlide();
+    this.diaporama();
+  }
+  autoPlay() {
+    this.chrono = setInterval (() => this.diaporama(), 1000);
+  }
 }
