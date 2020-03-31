@@ -6,51 +6,28 @@ let marker;
 let detailsWindow = document.getElementById('details-window');
 let statutStation = document.getElementById('info-statut-station');
 let stationName = document.getElementById('info-station-name');
-let stationAdress = document.getElementById('info-station-name');
-let stationPotential = document.getElementById('info-station-potential');
-let stationDispo = document.getElementById('info-station-dispo');
+let stationAddress = document.getElementById('info-station-address');
+let stationPotentialBikes = document.getElementById('info-station-bikes-potential');
+let stationDispo = document.getElementById('info-station-bikes-dispo');
 
 class Carte {
   constructor () {
       this.macarte = L.map('map',{scrollWheelZoom: false}).setView([lat, lon], zoom);
       this.tilelayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png').addTo(this.macarte);
-      //this.ajaxGet();
   }
 }
-/*
-ajaxGet(this.url, callback) {
-  this.xhr.onreadystatechange = function() {        
-    if (this.xhr.readyState == 4 && this.xhr.status == 200) {             
-      //console.log(this.xhr.response);
-      this.callback(this.xhr.response);            
-      } 
-      else if (this.xhr.readyState ==! 4 && this.xhr.status ==! 200) {
-        console.log("Chargement.. ou erreur..");
-      }
-    }
-    this.xhr.open("GET", this.url);
-    this.xhr.responseType = "json";
-    this.xhr.send();
-}
-mapMain.ajaxGet(url, function(data) {
-  for(i = 0; i < data.length; i++) {
-    //console.log(data[i].number);
-    let marker = L.marker([data[i].position.lat, data[i].position.lng]).addTo(mapMain.macarte);
-  }
-});
-}
-*/
+
 let mapMain = new Carte();
 
-// creation de la fonction ajax qui recupere les datas sur le serveur jcdecaux
+// creation de la fonction ajax qui recupere les stationss sur le serveur jcdecaux
 function ajaxGet(url, callback) {    
   let xhr = new XMLHttpRequest();    
   xhr.onreadystatechange = function() {        
     if (xhr.readyState == 4 && xhr.status == 200) {             
         callback(xhr.response);            
-    } 
+    }
     else if (this.readyState ==! 4 && this.status ==! 200) {
-        console.log("Chargement.. ou erreur..");
+        console.log("erreur..");
     }
   }
   xhr.open("GET", url);
@@ -58,36 +35,38 @@ function ajaxGet(url, callback) {
   xhr.send();
 };
 
+//function qui recuper la fonction ajaxget 
 
-ajaxGet(url, function(data) {
-  for(i = 0; i < data.length; i++) {
-    console.log(data[i].status);
-    if(data[i].status === "OPEN") {
-      //marker = openIcon;
-      marker = L.marker([data[i].position.lat, data[i].position.lng]).addTo(mapMain.macarte);
-    }
-    else if(data[i].status === "CLOSED") { // code inutile pour l'instant. l'objectif est d'afficher un marqueur rouge si la sation est fermee.
-      //marker = closeIcon;
-    };
-    //marker.addEventListener('click', function() {
-      //detailsWindow.style.display="block";
-      //statutStation = <p></p>
-      //stationName = 
-      //stationAdress =
-      //stationPotential = 
-      //stationDispo = 
-    //)
- //}
-  }
-});
-/*
-let detailsWindow = document.getElementById('details-window');
-let statutStation = document.getElementById('info-statut-station');
-let stationName = document.getElementById('info-station-name');
-let stationAdress = document.getElementById('info-station-adress');
-let stationPotential = document.getElementById('info-station-potential');
-let stationDispo = document.getElementById('info-station-dispo');
-*/
+function mapInteract() {
+  ajaxGet(url, function(stations) {
+    stations.forEach(station => {
+      marker = L.marker([station.position.lat, station.position.lng]).addTo(mapMain.macarte);
+      /*
+      if(station.status === "OPEN" && station.totalStands.availabilities.bikes >= 4) {
+        marker = greenIcon;
+      }
+      else if (station.status === "OPEN" && station.totalStands.availabilities.bikes < 4 && station.totalStands.availabilities.bikes >= 1) {
+        marker = orangeIcon;
+      }
+      else {
+        marker = redIcon;
+      }
+      */
+      marker.addEventListener('click', () => {
+        detailsWindow.style.display="block";
+        statutStation.innerHTML = station.status;
+        stationName.innerHTML = station.name;
+        stationAddress.innerHTML = station.address;
+        stationPotentialBikes.innerHTML = station.totalStands.availabilities.bikes; 
+        stationDispo.innerHTML = station.capacity;
+      });
+    });
+  })
+}
+mapInteract();
+
+
+
 /*
 {
   "number": 123,
@@ -107,8 +86,8 @@ let stationDispo = document.getElementById('info-station-dispo');
   "shape": null,
   "totalStands": {
     "availabilities": {
-      "bikes": 15,
-      "stands": 25
+      "bikes": 15, <<<<<< JE VEUX CA 
+      "stands": 25 <<<<<< JE VEUX CA
     },
     "capacity": 40
   },
@@ -129,3 +108,30 @@ let stationDispo = document.getElementById('info-station-dispo');
 }
 */
 
+// poo methode ajax?
+/*
+ajaxGet(this.url, callback) {
+  this.xhr.onreadystatechange = function() {        
+    if (this.xhr.readyState == 4 && this.xhr.status == 200) {             
+      //console.log(this.xhr.response);
+      this.callback(this.xhr.response);            
+      } 
+      else if (this.xhr.readyState ==! 4 && this.xhr.status ==! 200) {
+        console.log("Chargement.. ou erreur..");
+      }
+    }
+    this.xhr.open("GET", this.url);
+    this.xhr.responseType = "json";
+    this.xhr.send();
+}
+mapMain.ajaxGet(url, function(stations) {
+  for(i = 0; i < stations.length; i++) {
+    //console.log(stations[i].number);
+    let marker = L.marker([stations[i].position.lat, stations[i].position.lng]).addTo(mapMain.macarte);
+  }
+});
+}
+*/
+
+// ajaxget avec une boucle for classique
+/*

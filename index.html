@@ -52,7 +52,7 @@
         	<figcaption>Bravo ! Votre velo est reserve pour 20 minutes.</figcaption>
         </figure>
 				<div id="slider-bloc-icon">
-					<button class="button-set" id="left-arrow" ><i class="fas fa-caret-left"></i></button>
+					<button class="button-set" id="left-arrow" onclick="mainSlider.clickLeftSlide()" ><i class="fas fa-caret-left"></i></button>
 					<button class="button-set" id="stop-button" onclick="mainSlider.stopSlide()"><i class="fas fa-pause"></i></button>
 					<button class="button-set" id="play-button" onclick="mainSlider.replaySlide()"><i class="fas fa-play"></i></button>
 					<button class="button-set" id="right-arrow"><i class="fas fa-caret-right"></i></button>
@@ -70,9 +70,9 @@
 				<hr>
 				<div id="statut-station">Statut de la station : <span id="info-statut-station"></span></div>
 				<div id="station-name">Nom de la station : <span id="info-station-name"></span></div>
-				<div id="station-adress">Adresse de la station : <span id="info-station-adress"></span> </div>
-				<div id="station-potential">Nombre de places totales : <span id="info-station-potential"></span></div>
-				<div id="station-dispo">Nombre de velos disponibles : <span id="info-station-dispo"></span></div>
+				<div id="station-adress">Adresse de la station : <span id="info-station-address"></span> </div>
+				<div id="station-potential">Nombre de places totales : <span id="info-station-bikes-potential"></span></div>
+				<div id="station-dispo">Nombre de velos disponibles : <span id="info-station-bikes-dispo"></span></div>
 				<div id="inputs">
 					<label id="firstname-label" for="other"><span>Nom :</span><input placeholder="Votre nom.." type="text" name="firstname" id="firstname-button"></label><br/>
 					<label id="lastname-label" for="other">Prenom :<input placeholder="Votre prenom.." type="text" name="lastname" id="lastname-button"></label>
@@ -85,7 +85,7 @@
 				<div id="canvas-button">
 					<button id="reset-button"><i class="fas fa-redo"></i></button>
 					<button id="cancel-button"><i class="fas fa-times"></i></button>
-					<button id="valid-button"><i class="fas fa-check"></i	></button>
+					<button id="valid-button"><i class="fas fa-check"></i></button>
 				</div>
 			</div>
 		</div>

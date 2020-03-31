@@ -19,16 +19,6 @@ class Slider {
       }
     })
   }
-  clickLeftSlide() {
-    this.leftButton.addEventListener('click', (e) => {
-      this.leftSlide();
-    })
-  }
-  clickRightSlide() {
-    this.rightButton.addEventListener('click', (e) => {
-      this.rightSlide();
-    })
-  }
   diaporama() {
   for(i = 0; i < this.images.length; i++) {
     this.images[i].style.display = "none";
@@ -68,5 +58,15 @@ class Slider {
   }
   autoPlay() {
     this.chrono = setInterval (() => this.diaporama(), 1000);
+  }
+  clickLeftSlide() {
+    this.leftButton.addEventListener('click', () => {
+      this.leftSlide();
+    })
+  }
+  clickRightSlide() {
+    this.rightButton.addEventListener('click', () => {
+      this.rightSlide();
+    })
   }
 }
