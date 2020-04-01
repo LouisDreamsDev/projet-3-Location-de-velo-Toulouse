@@ -133,5 +133,3 @@ mapMain.ajaxGet(url, function(stations) {
 }
 */
 
-// ajaxget avec une boucle for classique
-/*
