@@ -1,12 +1,12 @@
 class Slider {
   constructor(images, sliderIndex) {
-    this.keydown();
     this.images = images;
     this.sliderIndex = sliderIndex;
     this.playButton = playButton;
     this.stopButton = stopButton;
     this.leftButton = leftButton;
     this.rightButton = rightButton;
+    this.keydown();
     this.autoPlay();
   }
   keydown() {
@@ -57,7 +57,7 @@ class Slider {
     this.diaporama();
   }
   autoPlay() {
-    this.chrono = setInterval (() => this.diaporama(), 1000);
+    this.chrono = setInterval (() => this.diaporama(), 5000);
   }
   clickLeftSlide() {
     this.leftButton.addEventListener('click', () => {

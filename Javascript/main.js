@@ -18,3 +18,10 @@ let mainSlider = new Slider(images, sliderIndex);
 //let popup = document.getElementById('details-station');
 
 //let mapMain = new Carte();
+
+// Canvas
+
+//let canvas = document.getElementById('canvas');
+//let canvasButton = document.getElementById('submit-canvas-button');
+//let signature = document.getElementById('signature');
+//let ctx = signature.getContext("2d");

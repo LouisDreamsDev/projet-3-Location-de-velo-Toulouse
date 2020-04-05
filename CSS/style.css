@@ -123,6 +123,9 @@ figure figcaption {
 	text-align: center;
 	padding: 15px 0 0 0;
 }
+figure figcaption.add-width {
+	height: 100px;
+}
 #slider-bloc-icon {
 	position: absolute;
 	bottom: -48px;
@@ -159,15 +162,16 @@ figure figcaption {
 	border-radius: 8px;
 	z-index: 2;
 	margin: auto;
+	
 }
 #details-window {
-	width: 25%;
+	width: 35%;
 	margin: 0 0 0 10px;
 	border: solid 4px #a40c18;
 	border-radius: 8px;
 	padding: 15px;
 	line-height: 50px;
-	display: none;
+	/*display: none;*/
 }
 #details-window h3 {
 	text-align: center;
@@ -186,28 +190,25 @@ figure figcaption {
 #lastname-label {
 	margin-bottom: 20px;
 }
-#submit-button {
-	margin: 0 0 20px 0;
+#submit-canvas-button {
+	margin: 0 0 10px 0;
 }
-label {
-	width: 100%;
-}
-#canvas {
-	width: 60%;
-	height: 100px;
-	border: 1px solid black;
+#canvasContainer {
 	margin: auto;
 	/*display: none;*/
 }
-#signature {
-  width: 180px;
+#canvas {
+	display: block;
+	margin: auto;
+	border-radius: 8px;
+	border: 1px solid black;
 }
 #canvas-button {
 	display: flex;
 	justify-content: center;
 }
 #canvas-button button {
-	font-size: 0.6em;
+	font-size: 0.3em;
 	margin: 5px;
 	background-color: white;
 	border-radius: 50%;

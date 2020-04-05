@@ -1,14 +1,9 @@
 let lat = 43.60426;
 let lon = 1.44367;
-let zoom = 12;
+let zoom = 13;
 let url = "https://api.jcdecaux.com/vls/v1/stations?contract=toulouse&apiKey=110bb2109635584660d15785866f72ba75aa09d8";
 let marker;
-let detailsWindow = document.getElementById('details-window');
-let statutStation = document.getElementById('info-statut-station');
-let stationName = document.getElementById('info-station-name');
-let stationAddress = document.getElementById('info-station-address');
-let stationPotentialBikes = document.getElementById('info-station-bikes-potential');
-let stationDispo = document.getElementById('info-station-bikes-dispo');
+
 
 class Carte {
   constructor () {
@@ -19,55 +14,69 @@ class Carte {
 
 let mapMain = new Carte();
 
-// creation de la fonction ajax qui recupere les stationss sur le serveur jcdecaux
-function ajaxGet(url, callback) {    
-  let xhr = new XMLHttpRequest();    
-  xhr.onreadystatechange = function() {        
-    if (xhr.readyState == 4 && xhr.status == 200) {             
-        callback(xhr.response);            
-    }
-    else if (this.readyState ==! 4 && this.status ==! 200) {
-        console.log("erreur..");
-    }
-  }
-  xhr.open("GET", url);
-  xhr.responseType = "json";
-  xhr.send();
-};
+// Stations sur la carte + infos
 
-//function qui recuper la fonction ajaxget 
+let detailsWindow = document.getElementById('details-window');
+let statutStation = document.getElementById('info-statut-station');
+let stationName = document.getElementById('info-station-name');
+let stationAddress = document.getElementById('info-station-address');
+let stationPotentialBikes = document.getElementById('info-station-bikes-potential');
+let stationAvailableBikes = document.getElementById('info-station-bikes');
+let markerClusters = L.markerClusterGroup();
+//let markerClusters; ?question 1?
+let SetIcon = L.Icon.extend({
+  options: {
+    shadowUrl: 'img/icons/marker-shadowIcon.png',
+    iconSize:     [25, 41],
+    shadowSize:   [41, 41],
+    iconAnchor:   [12, 41],
+    shadowAnchor: [4, 41],
+    popupAnchor:  [1, -34]
+  }
+});
+let greenIcon = new SetIcon({iconUrl: 'img/icons/greenIcon.png'});
+let orangeIcon = new SetIcon({iconUrl: 'img/icons/orangeIcon.png'});
+let redIcon = new SetIcon({iconUrl: 'img/icons/redIcon.png'});
+let blackIcon = new SetIcon({iconUrl: 'img/icons/blackIcon.png'});
 
 function mapInteract() {
-  ajaxGet(url, function(stations) {
-    stations.forEach(station => {
-      marker = L.marker([station.position.lat, station.position.lng]).addTo(mapMain.macarte);
-      /*
-      if(station.status === "OPEN" && station.totalStands.availabilities.bikes >= 4) {
-        marker = greenIcon;
-      }
-      else if (station.status === "OPEN" && station.totalStands.availabilities.bikes < 4 && station.totalStands.availabilities.bikes >= 1) {
-        marker = orangeIcon;
-      }
-      else {
-        marker = redIcon;
-      }
-      */
-      marker.addEventListener('click', () => {
-        detailsWindow.style.display="block";
-        statutStation.innerHTML = station.status;
-        stationName.innerHTML = station.name;
-        stationAddress.innerHTML = station.address;
-        stationPotentialBikes.innerHTML = station.totalStands.availabilities.bikes; 
-        stationDispo.innerHTML = station.capacity;
+    ajaxGet(url, function(stations) {
+      stations.forEach(station => {
+        // si ouvert et velos >= 4 = icone verte
+        if(station.status === "OPEN" && station.available_bikes >= 4) {
+          marker = L.marker([station.position.lat, station.position.lng], {icon: greenIcon});
+        }
+        // si ouvert et velo entre 1 et 3 = icone orange
+        else if (station.status === "OPEN" && station.available_bikes < 4 && station.available_bikes >= 1) {
+          marker = L.marker([station.position.lat, station.position.lng], {icon: orangeIcon});
+        }
+        // si ouvert mais 0 velo = icone rouge
+        else if (station.status === "OPEN" && station.available_bikes == 0) {
+          marker = L.marker([station.position.lat, station.position.lng], {icon: redIcon});
+        }
+        // si ferme = icone noire
+        else if (station.status === "CLOSED") {
+          marker = L.marker([station.position.lat, station.position.lng], {icon: blackIcon});
+        }
+        //marker = L.marker([station.position.lat, station.position.lng]);
+        // ecoute au clic des markers et affiche les infos de la station selectionnee
+        marker.addEventListener('click', () => {
+          detailsWindow.style.display="block";
+          statutStation.innerHTML = station.status;
+          stationName.innerHTML = station.name;
+          stationAddress.innerHTML = station.address;
+          stationPotentialBikes.innerHTML = station.available_stands; // ?question 2?
+          stationAvailableBikes.innerHTML = station.available_bikes; // ?question 2?
+        });
+        //markerClusters = L.markerClusterGroup(); ?question 1?
+        markerClusters.addLayer(marker);
+        mapMain.macarte.addLayer(markerClusters);
       });
-    });
-  })
-}
-mapInteract();
+    })
+  }
+  mapInteract();
 
-
-
-/*
+  /*
 {
   "number": 123,
   "contractName" : "Lyon",
@@ -108,28 +117,4 @@ mapInteract();
 }
 */
 
-// poo methode ajax?
-/*
-ajaxGet(this.url, callback) {
-  this.xhr.onreadystatechange = function() {        
-    if (this.xhr.readyState == 4 && this.xhr.status == 200) {             
-      //console.log(this.xhr.response);
-      this.callback(this.xhr.response);            
-      } 
-      else if (this.xhr.readyState ==! 4 && this.xhr.status ==! 200) {
-        console.log("Chargement.. ou erreur..");
-      }
-    }
-    this.xhr.open("GET", this.url);
-    this.xhr.responseType = "json";
-    this.xhr.send();
-}
-mapMain.ajaxGet(url, function(stations) {
-  for(i = 0; i < stations.length; i++) {
-    //console.log(stations[i].number);
-    let marker = L.marker([stations[i].position.lat, stations[i].position.lng]).addTo(mapMain.macarte);
-  }
-});
-}
-*/
-
+  
