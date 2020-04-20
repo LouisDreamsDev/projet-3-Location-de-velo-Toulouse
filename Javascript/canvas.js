@@ -40,4 +40,3 @@ let painting = false;
   });
 
 
-// procedural puis P.O.O

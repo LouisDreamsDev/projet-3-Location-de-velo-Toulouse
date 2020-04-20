@@ -14,7 +14,24 @@ class Carte {
 
 let mapMain = new Carte();
 
-// Stations sur la carte + infos
+// fonction ajax (connection au serveur)
+
+function ajaxGet(url, callback) {    
+  let xhr = new XMLHttpRequest();    
+  xhr.onreadystatechange = function() {        
+    if (xhr.readyState == 4 && xhr.status == 200) {             
+        callback(xhr.response);            
+    }
+    else if (this.readyState ==! 4 && this.status ==! 200) {
+        console.log("erreur..");
+    }
+  }
+  xhr.open("GET", url);
+  xhr.responseType = "json";
+  xhr.send();
+};
+
+// Stations sur la carte + marker clusters + infos
 
 let detailsWindow = document.getElementById('details-window');
 let statutStation = document.getElementById('info-statut-station');
@@ -23,7 +40,6 @@ let stationAddress = document.getElementById('info-station-address');
 let stationPotentialBikes = document.getElementById('info-station-bikes-potential');
 let stationAvailableBikes = document.getElementById('info-station-bikes');
 let markerClusters = L.markerClusterGroup();
-//let markerClusters; ?question 1?
 let SetIcon = L.Icon.extend({
   options: {
     shadowUrl: 'img/icons/marker-shadowIcon.png',
@@ -58,17 +74,15 @@ function mapInteract() {
         else if (station.status === "CLOSED") {
           marker = L.marker([station.position.lat, station.position.lng], {icon: blackIcon});
         }
-        //marker = L.marker([station.position.lat, station.position.lng]);
         // ecoute au clic des markers et affiche les infos de la station selectionnee
         marker.addEventListener('click', () => {
           detailsWindow.style.display="block";
           statutStation.innerHTML = station.status;
           stationName.innerHTML = station.name;
           stationAddress.innerHTML = station.address;
-          stationPotentialBikes.innerHTML = station.available_stands; // ?question 2?
-          stationAvailableBikes.innerHTML = station.available_bikes; // ?question 2?
+          stationPotentialBikes.innerHTML = station.available_bike_stands;
+          stationAvailableBikes.innerHTML = station.available_bikes;
         });
-        //markerClusters = L.markerClusterGroup(); ?question 1?
         markerClusters.addLayer(marker);
         mapMain.macarte.addLayer(markerClusters);
       });

@@ -150,7 +150,19 @@ figure figcaption.add-width {
 #play-button {
 	display: none;
 }
-#gobal-sec-map {
+#map-subtitle {	
+	font-size: 1.4em;
+	text-align: center;
+}
+#legend-list {
+	list-style-type: none;
+	display: flex;
+	justify-content: space-around;
+}
+#legend-list img {
+	width: 1.5em;
+}
+#gobal-map {
 	display: flex;
 	width: 94%;
 	margin: auto;
