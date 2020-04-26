@@ -2,9 +2,10 @@ let canvasButton = document.getElementById('submit-canvas-button');
 let canvasContainer = document.getElementById('canvasContainer');
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
-let resetButton = document.getElementById('reset-button');
+let clearButton = document.getElementById('clear-button');
 let painting = false;
 
+  // canvas
   window.addEventListener('load', () => {
     canvas.width = 300;
     canvas.height = 150;
@@ -26,9 +27,8 @@ let painting = false;
       ctx.beginPath();
       ctx.moveTo(e.layerX, e.layerY);
     }
-    function reset() {  
-      resetButton = ctx.clearRect(0, 0, canvas.width, canvas.height);
-      console.log('reset');
+    function clearDraw() {  
+      clearButton = ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
     
     canvas.addEventListener('mousedown', startDraw);
@@ -36,7 +36,7 @@ let painting = false;
     //canvas.addEventListener('mouseout', stopDraw);
     canvas.addEventListener('mouseleave', stopDraw);
     canvas.addEventListener('mousemove', drawing);
-    resetButton.addEventListener('click', reset);
+    clearButton.addEventListener('click', clearDraw);
   });
 
 

@@ -77,11 +77,22 @@ function mapInteract() {
         // ecoute au clic des markers et affiche les infos de la station selectionnee
         marker.addEventListener('click', () => {
           detailsWindow.style.display="block";
+          if (station.status === "OPEN") {
+            station.status = "Station ouverte";
+          }
+          else if (station.status === "CLOSED"){
+            station.status = "Station fermee";
+          };
+          let station_name_lowcase = station.name.toLowerCase();
+          let station_address_lowcase = station.address.toLowerCase();
           statutStation.innerHTML = station.status;
-          stationName.innerHTML = station.name;
-          stationAddress.innerHTML = station.address;
+          stationName.innerHTML = station_name_lowcase;
+          stationAddress.innerHTML = station_address_lowcase;
           stationPotentialBikes.innerHTML = station.available_bike_stands;
           stationAvailableBikes.innerHTML = station.available_bikes;
+          // un peu de stockage
+          localStorage.setItem('station_address', station_address_lowcase);
+          localStorage.setItem('station_name', station_name_lowcase);
         });
         markerClusters.addLayer(marker);
         mapMain.macarte.addLayer(markerClusters);
