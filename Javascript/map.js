@@ -100,46 +100,4 @@ function mapInteract() {
     })
   }
   mapInteract();
-
-  /*
-{
-  "number": 123,
-  "contractName" : "Lyon",
-  "name": "nom station",
-  "address": "adresse indicative",
-  "position": {
-    "latitude": 45.774204,
-    "longitude": 4.867512
-  },
-  "banking": true,
-  "bonus": false,
-  "status": "OPEN",
-  "lastUpdate": "2019-04-08T12:23:34Z",
-  "connected": true,
-  "overflow": true,
-  "shape": null,
-  "totalStands": {
-    "availabilities": {
-      "bikes": 15, <<<<<< JE VEUX CA 
-      "stands": 25 <<<<<< JE VEUX CA
-    },
-    "capacity": 40
-  },
-  "mainStands": {
-    "availabilities": {
-      "bikes": 15,
-      "stands": 15
-    },
-    "capacity": 30
-  },
-  "overflowStands": {
-    "availabilities": {
-      "bikes": 0,
-      "stands": 10
-    },
-    "capacity": 10
-  }
-}
-*/
-
   

@@ -55,12 +55,12 @@ cancelResaButton.addEventListener('click', () => {
   
 function cancelResa() {
   if (confirm("Etes-vous sur d'annuler votre reservation? Cette action est irreversible. Toute les donnees seront effacees !")) {
-    localStorage.clear();
-    sessionStorage.clear();
+    alert("Votre reservation a ete annulee avec succes");
     mapSection.style.display='block';
     prefooter.style.display='none';
     sliderSection.style.display='block';
-    alert("Votre reservation a ete annulee avec succes");
+    localStorage.clear();
+    sessionStorage.clear();
   }
   else {
     alert("votre reservation n'a pas ete annulee. Il vous reste " + tictoc() + " minutes");
@@ -70,8 +70,9 @@ function cancelResa() {
 // 20 minutes de chrono une fois la reservation effectuee
 
 let timer = document.getElementById('timer');
-let counter = -0;
+let counter = 0;
 let timeleft = 1200;
+let result = 0;
 
 function timerGlobal() {
 
@@ -86,11 +87,33 @@ function timerGlobal() {
 
   function countx() {
     counter--;
-    timer.innerHTML = convertSeconds(timeleft + counter);
+    result = convertSeconds(timeleft + counter);
+    timer.innerHTML = result;
+    localStorage.setItem('timer', result);
 
     if (counter == timeleft) { // quand le temps imparti = compteur, la boucle des secondes [setInterval] se termine
       clearInterval(interval);
       timer.innerHTML = "00:00";
+      setTimeout(() => {alert("Les 20 minutes sont ecoulees. Vous pouvez a nouveau reserver un velo."), 2000});
+      endTimer();
     }; 
   }
+  function endTimer() {
+    localStorage.clear();
+    sessionStorage.clear();
+    mapSection.style.display='block';
+    prefooter.style.display='none';
+    sliderSection.style.display='block';
+  }
 }
+
+/*
+class tictoc {
+  constructor() {
+    this.timer = timer;
+    this.counter = counter;
+    this.timeleft = timeleft;
+    this.interval = interval;
+  }
+}
+*/

@@ -6,7 +6,7 @@ let clearButton = document.getElementById('clear-button');
 let painting = false;
 
   // canvas
-  window.addEventListener('load', () => {
+  window.addEventListener('load', function triggerCanvas() {
     canvas.width = 300;
     canvas.height = 150;
 
