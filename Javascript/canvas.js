@@ -4,6 +4,8 @@ let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 let clearButton = document.getElementById('clear-button');
 let painting = false;
+let blankCanvas = canvas.toDataURL();
+let canvasError = document.getElementById('canvasErrorMsg'); 
 
   // canvas
   window.addEventListener('load', function triggerCanvas() {
@@ -20,7 +22,7 @@ let painting = false;
     }
     function drawing(e) {
       if(!painting) return; 
-      ctx.lineWidth = 4;
+      ctx.lineWidth = 2;
       ctx.lineCap = 'butt';
       ctx.lineTo(e.layerX, e.layerY);
       ctx.stroke();
@@ -30,7 +32,7 @@ let painting = false;
     function clearDraw() {  
       clearButton = ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
-    
+    // returns true if all color channels in each pixel are 0 (or "blank")
     canvas.addEventListener('mousedown', startDraw);
     canvas.addEventListener('mouseup', stopDraw);
     //canvas.addEventListener('mouseout', stopDraw);
@@ -38,5 +40,4 @@ let painting = false;
     canvas.addEventListener('mousemove', drawing);
     clearButton.addEventListener('click', clearDraw);
   });
-
 

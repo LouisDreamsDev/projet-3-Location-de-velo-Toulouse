@@ -199,23 +199,30 @@ figure figcaption.add-width {
 #details-window h3 {
 	text-align: center;
 }
-#label-container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
 }
-#form input, label {	
-	padding: 4px;
+#line-break-flexbox {
+    flex: 100%;
+    margin: 6px;;
+}
+#input-container input {
+    display: none;
+    margin: 6px;
+    padding: 6px;	
 }
 #submit-canvas-button {
-	display: block;
+    display: none;
 	margin: auto;
 	padding: 8px;
 }
 #canvasContainer {
 	margin: auto;
 	text-align: center;
-	/*display: none;*/
+	display: none;
 }
 #canvas {
 	display: block;
@@ -223,10 +230,18 @@ figure figcaption.add-width {
 	border-radius: 8px;
 	border: 1px solid black;
 }
+#blankCanvas {
+    display: none;
+}
+#canvasErrorMsg {
+    color: red;
+    display: none;
+    text-decoration: underline;
+}
 #canvas-button-container {
-	display: flex;
+    display: flex;
 	justify-content: center;
-	align-items: center;
+    align-items: center;
 }
 #canvas-button-container button {
 	margin: 8px;
@@ -243,6 +258,9 @@ figure figcaption.add-width {
 #pre-footer span {
 	color:#a40c18;
 	text-decoration: underline;
+}
+#info-storage {
+    font-size: 0.7em;
 }
 #timer {
 	font-size: 1.5em;
@@ -268,4 +286,7 @@ footer h2 {
 #legals {
 	font-size: 0.8em;
 	color: lightgrey;
+}
+.none {
+    display: none;
 }

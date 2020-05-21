@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-	<script src="https://kit.fontawesome.com/8b0d9e11b7.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
-	<link rel="stylesheet" href="CSS/style.css">
-	<link rel="stylesheet" href="CSS/responsiv-design.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" />
-	<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />
-	<title>Toulouse Loc'Velo</title>
+    <head>
+    <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/8b0d9e11b7.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">	
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" />
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/responsiv-design.css">
+    <title>Toulouse Loc'Velo</title>
 </head>
 <body>
 <div id="div-all">
@@ -29,7 +29,7 @@
 	<h1 id="main-title">&nbsp;Velô' Toulouse&nbsp;</h1>
 	<!-- slider section -->
 	<section id="slider-area">
-		<h2 id="slider-title">Voici un petit diaporama pour vous expliquez comment reserver un velo a Toulouse..</h2>
+		<h2 id="slider-title">Voici un petit diaporama pour vous expliquez comment réserver un vélo à Toulouse..</h2>
 		<div id="slider-container">
     	<div id="image-slider">
        	<figure id="slider-image-1" class="slider-image">
@@ -42,15 +42,15 @@
         </figure>
         <figure id="slider-image-3" class="slider-image">
         	<img  src="img/slider/slider-img-map.jpg" alt="">
-        	<figcaption class="add-width">3<br>Pour commencer, selectionnez un point sur la carte</figcaption> <!--img a update avec les clusters-->
+        	<figcaption class="add-width">3<br>Pour commencer, sélectionnez un point sur la carte</figcaption> <!--img a update avec les clusters-->
         </figure>
         <figure id="slider-image-4" class="slider-image">
         	<img  src="img/slider/formulaire.jpg" alt="">
-        	<figcaption class="add-width">4<br>Inscrivez ensuite votre nom, prenom ainsi que votre plus belle signature</figcaption>
+        	<figcaption class="add-width">4<br>Inscrivez ensuite votre nom, prénom ainsi que votre plus belle signature</figcaption>
         </figure>
         <figure id="slider-image-5" class="slider-image">
         	<img  src="img/slider/velo-toulouse5.jpg" alt="">
-        	<figcaption class="add-width">5<br>Bravo ! Votre velo est reserve pour 20 minutes !<br>Bonne balade !</figcaption>
+        	<figcaption class="add-width">5<br>Bravo ! Votre vélo est reservé pour 20 minutes !<br>Bonne balade !</figcaption>
         </figure>
 				<div id="slider-bloc-icon">
 					<button class="button-set" id="left-arrow" onclick="mainSlider.leftSlide()"><i class="fas fa-caret-left"></i></button>
@@ -64,14 +64,14 @@
 
 	<section id="map-area">
 		<h2 id="map-title">La jolie carte de Toulouse</h2>
-		<p id="map-subtitle">Choisissez une station en fonction de la legende..</p>
+		<p id="map-subtitle">Choisissez une station en fonction de la légende..</p>
 		<!-- legende carte-->
 		<div id="legend">
 			<ul id="legend-list">
-				<li><img src="img/icons/greenIcon.png" alt="Icone de station verte"><p> - Ouvert, plus de 4 velos disponibles</p></li>
-				<li><img src="img/icons/orangeIcon.png" alt="Icone de station orange"><p> - Ouvert, entre 1 et 4 velos disponibles</p></li>
-				<li><img src="img/icons/redIcon.png" alt="Icone de station rouge"><p> - Ouvert, mais plus aucun velo disponible</p></li>
-				<li><img src="img/icons/blackIcon.png" alt="Icone de station noire"><p> - Station fermee momentanément</p></li>
+				<li><img src="img/icons/greenIcon.png" alt="Icone de station verte"><p> - Ouvert, plus de 4 vélos disponibles</p></li>
+				<li><img src="img/icons/orangeIcon.png" alt="Icone de station orange"><p> - Ouvert, entre 1 et 4 vélos disponibles</p></li>
+				<li><img src="img/icons/redIcon.png" alt="Icone de station rouge"><p> - Ouvert, mais plus aucun vélo disponible</p></li>
+				<li><img src="img/icons/blackIcon.png" alt="Icone de station noire"><p> - Station fermée momentanément</p></li>
 			</ul>
 		</div>
 		<div id="global-map">
@@ -82,23 +82,26 @@
 				<div id="statut-station">Statut de la station : <span id="info-statut-station"></span></div>
 				<div id="station-name">Nom de la station : <span id="info-station-name"></span></div>
 				<div id="station-adress">Adresse de la station : <span id="info-station-address"></span> </div>
-				<div id="station-potential">Nombre de places totales libres : <span id="info-station-bikes-potential"></span></div>
-				<div id="station-dispo">Nombre de velos disponibles : <span id="info-station-bikes"></span></div>
+				<div id="station-dispo">Nombre de vélos disponibles : <span id="info-station-bikes"></span></div>
+				<div id="station-potential">Nombre de places libres : <span id="info-station-bikes-potential"></span></div>
 				<hr>
 				<div id="form">
-					<div id="label-container">
-						<label id="firstname-label" for="other"><input placeholder="Votre nom.." type="text" name="name" id="name-field" required /></label><br/>
-						<label id="surname-label" for="other"><input placeholder="Votre prenom.." type="text" name="surname" id="surname-field" required /></label>
-					</div>
-					<button id="submit-canvas-button" name="submit">Reserver</button>
-				</div>
+					<form id="input-container" onsubmit="return false;">
+						<input placeholder="Votre nom.." type="text" name="name" id="name-field" required />
+                        <input placeholder="Votre prenom.." type="text" name="surname" id="surname-field" required />
+                        <div id="line-break-flexbox"></div>
+                        <button type="" id="submit-canvas-button" name="">Réserver</button>
+                    </form>
+                </div>
 				<div id="canvasContainer">
-					<p>Plus qu'une petite signature..</p>
-					<canvas id="canvas"></canvas>
+					<p>Ajoutez ensuite une signature..</p>
+                    <canvas id="canvas"></canvas>
+                    <canvas id="blankCanvas"></canvas>
 					<div id="canvas-button-container">
 						<button id="clear-button">Effacer</i></button>
 						<button id="valid-button">Valider</i></button>
-					</div>
+                    </div>
+                    <div id="canvasErrorMsg"><p>Le canvas est vide. Veuillez signer avant de valider.</p></div>
 				</div>
 			</div>
 		</div>
@@ -107,19 +110,22 @@
 	<section id="pre-footer">
 
 		<div id="chat-box">
-			<p>Votre reservation d'un velo a la station <span id="chatbox-station-name"></span> a l'adresse <span id="chatbox-station-adress"></span> par <span id="chatbox-stored-user-name"></span> <span id="chatbox-stored-user-surname"></span> est bien validee.</span> <br><br> Il vous reste :
+			<p>Votre réservation d'un vélo à la station <span id="chatbox-station-name"></span> à l'adresse <span id="chatbox-station-adress"></span> par <span id="chatbox-stored-user-name"></span> <span id="chatbox-stored-user-surname"></span> est bien validée.</span> <br><br> Il vous reste :
 			<div id="timer"></div> 
 			<br>
-			pour recuperer votre velo. Depechez-vous ! <br><br>
-			Vous pouvez toujours annuler votre reservation en cliquant  ici : <button id="cancel-button">Annulation</i></button>
-			</p>
+			pour récupérer votre vélo. Dépêchez-vous ! <br><br>
+			Vous pouvez toujours annuler votre réservation en cliquant  ici : <button id="cancel-button">Annulation</i></button>
+            </p>
+            <br>
+            <br>
+            <p id="info-storage"> <strong>PS :</strong> Votre réservation restera active si vous quittez la page, mais pas si vous quitter votre navigateur.</p>
 		</div>
 
 	</section>
 	<!-- Pied de page -->
 	<footer id="footer">
 		<h2>A Propos</h2>
-		<p id="contact">Projet realise dans le carde de la formation Developpeur Web Junior OpenClassRooms.</p>
+		<p id="contact">Projet réalisé dans le cadre de la formation Développeur Web Junior proposée par OpenClassRooms.</p>
 		<span class="social-icon"><i></i></span>
 		<span class="social-icon"><i></i></span>
 		<span class="social-icon"><i></i></span>
@@ -127,12 +133,12 @@
 		<p id="legals"></p>
 	</footer>
 </div>
-<script type="text/javascript" src="Javascript/slider.js"></script>
+<script src="Javascript/jquery-3.5.0.min.js"></script>
 <script type='text/javascript' src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
-<!-- <script type="text/javascript" src="Javascript/map.js"></script> -->
-<script type="text/javascript" src="Javascript/maptestpoo.js"></script>
-<script type="text/javascript" src="Javascript/canvas.js"></script>
-<script type="text/javascript" src="Javascript/booking.js"></script>
+<script type="text/javascript" src="Javascript/slider.js"></script>
+<script type="text/javascript" src="Javascript/mappoo.js"></script>
+<!-- <script type="text/javascript" src="Javascript/canvas.js"></script>
+<script type="text/javascript" src="Javascript/booking.js"></script> -->
 <script type="text/javascript" src="Javascript/main.js"></script>
 </body>
 </html>
