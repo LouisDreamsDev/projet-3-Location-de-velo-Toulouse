@@ -194,10 +194,13 @@ figure figcaption.add-width {
 	border-radius: 8px;
 	padding: 0 12px 0 12px;
 	line-height: 50px;
-	/*display: none;*/
+	display: none;
 }
 #details-window h3 {
 	text-align: center;
+}
+#details-window button {
+    border-radius: 10px;;
 }
 form {
     display: flex;
@@ -212,7 +215,7 @@ form {
 #input-container input {
     display: none;
     margin: 6px;
-    padding: 6px;	
+    padding: 6px;
 }
 #submit-canvas-button {
     display: none;

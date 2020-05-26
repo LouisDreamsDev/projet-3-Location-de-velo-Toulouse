@@ -1,12 +1,8 @@
-// declaration des variables du formulaire
-/*
-// error undeclared variables
-// declaration dans le fichier map
 let name = document.getElementById('name-field');
 let surname = document.getElementById('surname-field');
 let localName = localStorage.getItem('name');
 let localSurname = localStorage.getItem('surname');
-*/
+
 //declaration des variables du prefooter
 let mapSection = document.getElementById('map-area');
 let sliderSection = document.getElementById('slider-area');
@@ -31,7 +27,7 @@ if (localName !== null && localSurname !== null) { // si le local storage name e
 if (sessionStorage.getItem('counter') !== null) {
     validResa();
 }
-
+//
 function saveUserId() {
     localStorage.setItem('name', name.value); // recupere le contenu de name
     localStorage.setItem('surname', surname.value); // recupere le contenu de surname
@@ -39,8 +35,8 @@ function saveUserId() {
     canvasError.style.display='none';
 }
 
-canvasButton.addEventListener('click', saveUserId);
-//myCanvas.canvasButton.addEventListener('click', saveUserId);
+//canvasButton.addEventListener('click', saveUserId);
+myCanvas.canvasButton.addEventListener('click', saveUserId);
 
 function timerGlobal() {
 

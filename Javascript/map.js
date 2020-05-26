@@ -68,7 +68,7 @@ let blackIcon = new SetIcon({iconUrl: 'img/icons/blackIcon.png'});
 function mapInteract() {
 
     ajaxGet(url, function(stations) {
-
+    console.log(stations);
       stations.forEach(station => {
         // si ouvert et velos >= 4 = icone verte
         if(station.status === "OPEN" && station.available_bikes >= 4) {
