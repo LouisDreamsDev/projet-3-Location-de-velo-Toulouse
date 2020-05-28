@@ -1,5 +1,5 @@
 class MapModel {
-    constructor (lat, lon, zoom, xhr, ajaxUrl, marker, greenIcon, markerClusters, detailsWindow, stations) {
+    constructor () {
         this.lat = 43.60426;
         this.lon = 1.44367;
         this.zoom = 13;
@@ -15,6 +15,7 @@ class MapModel {
         this.marker;
         this.markerClusters = L.markerClusterGroup();
         this.stations;
+        this.station;
         this.greenIcon = new L.Icon({
             iconUrl: 'img/icons/greenIcon.png',
             shadowUrl: 'img/icons/marker-shadowIcon.png',
@@ -73,6 +74,8 @@ class MapModel {
     ajaxOK() {
         this.ajaxGet(this.ajaxUrl, (response) => {
             this.stations = response;
+        console.log(this.stations);
+
         })
         console.log(this.stations);
     }
@@ -102,6 +105,7 @@ class MapModel {
                         this.stationAddress.innerHTML = station.address.toLowerCase();
                         this.stationPotentialBikes.innerHTML = station.available_bike_stands;
                         this.stationAvailableBikes.innerHTML = station.available_bikes;
+                        veloMap.station = station;
                         veloResa.goFurther();
                     }
                     else if (station.status === "OPEN" && station.available_bikes === 0) {

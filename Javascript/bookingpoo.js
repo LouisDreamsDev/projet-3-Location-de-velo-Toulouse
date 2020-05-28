@@ -17,6 +17,7 @@ class ResaModel {
     this.minutes;
     this.seconds;
     this.timer = document.getElementById('timer');
+    this.canvasError = document.getElementById('canvasErrorMsg');
     this.initialTime = 1200;
     this.counter = 0;
     this.localCounter = sessionStorage.getItem('counter');
@@ -82,7 +83,7 @@ class ResaModel {
         }
         else if (sessionStorage.getItem('counter') !== null) { // si la mémoire de sessionStorage n'est pas nul, partir de là.
             sessionStorage.setItem('counter', sessionStorage.getItem('counter') -1); // soustrait -1 directement dans le storage de la key 'counter'
-            this.timer.innerHTML = this.convertSeconds(sessionStorage.getItem('counter')); // affiche le compteur à l'utilisateur
+            this.timer.innerHTML = myResa.convertSeconds(sessionStorage.getItem('counter')); // affiche le compteur à l'utilisateur
         }
         else { // si la mémoire est vide, counter vaut initialTime
             sessionStorage.setItem('counter',  this.initialTime);
@@ -94,9 +95,10 @@ class ResaModel {
     }
     /******************************************************************************************************************************/
     validResa() {
+        console.log(veloMap.station);
         this.canvasError.style.display='none';
-        sessionStorage.setItem('station_address', station_address_lowcase);
-        sessionStorage.setItem('station_name', station_name_lowcase);
+        sessionStorage.setItem('station_address', veloMap.station.address.toLowerCase());
+        sessionStorage.setItem('station_name', veloMap.station.name.toLowerCase());
         this.chatbox_station.innerHTML = sessionStorage.getItem('station_name');
         this.chatbox_address.innerHTML = sessionStorage.getItem('station_address');
         this.chatbox_name.innerHTML = localStorage.getItem('name');

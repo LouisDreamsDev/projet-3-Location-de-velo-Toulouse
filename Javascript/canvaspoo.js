@@ -1,5 +1,5 @@
 class CanvasModel {
-    constructor() {
+    constructor(e) {
         this.canvasButton = document.getElementById('submit-canvas-button');
         this.canvasContainer = document.getElementById('canvasContainer');
         this.canvas = document.getElementById('canvas');
@@ -11,48 +11,38 @@ class CanvasModel {
         this.triggerCanvas();
     } // fin du constructor
     startDraw(e) {
-        this.painting = true;
-        this.drawing(e);
+        veloCanvas.painting = true;
+        veloCanvas.drawing(e);
     }
     stopDraw() {
-        this.painting = false;
-        this.ctx.beginPath();
+        veloCanvas.painting = false;
+        veloCanvas.ctx.beginPath();
     }
-    drawing() {
-        if(!this.painting) return;
-        this.ctx.lineWidth = 2;
-        this.ctx.lineCap = 'butt';
-        this.ctx.lineTo(this.e.layerX, this.e.layerY);
-        this.ctx.stroke();
-        this.ctx.beginPath();
-        this.ctx.moveTo(this.e.layerX, this.e.layerY);
+    drawing(e) {
+        if(!veloCanvas.painting) return;
+        veloCanvas.ctx.lineWidth = 2;
+        veloCanvas.ctx.lineCap = 'butt';
+        veloCanvas.ctx.lineTo(e.layerX, e.layerY);
+        veloCanvas.ctx.stroke();
+        veloCanvas.ctx.beginPath();
+        veloCanvas.ctx.moveTo(e.layerX, e.layerY);
     }
     clearDraw() {
-        this.clearButton = this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        veloCanvas.clearButton = veloCanvas.ctx.clearRect(0, 0, veloCanvas.canvas.width, veloCanvas.canvas.height);
     }
     triggerCanvas() {
-        
         window.addEventListener('load', () => {
-            console.log("canvas");
-            
+            this.canvas.width = 300;
+            this.canvas.height = 150;
+            this.listenSignature();
         })
-        */
     }
-    /*
-    moveMouseDown() {
+    listenSignature() {
         this.canvas.addEventListener('mousedown', this.startDraw);
-    }
-    moveMouseUp() {
-        this.canvas.addEventListener('mouseup', this.startDraw);
-    }
-    leaveMouse() {
+        this.canvas.addEventListener('mouseup', this.stopDraw);
         this.canvas.addEventListener('mouseleave', this.stopDraw);
+        this.canvas.addEventListener('mousemove',  this.drawing);
+        this.clearButton.addEventListener('click', this.clearDraw); 
     }
-    mouseMove() {
-        this.canvas.addEventListener('mousemove', this.drawing);
-    }
-    clearCanvas() {
-        this.canvas.addEventListener('click', this.clearDraw);
-    }
-    */
+
 }

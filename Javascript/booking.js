@@ -1,7 +1,4 @@
-let name = document.getElementById('name-field');
-let surname = document.getElementById('surname-field');
-let localName = localStorage.getItem('name');
-let localSurname = localStorage.getItem('surname');
+
 
 //declaration des variables du prefooter
 let mapSection = document.getElementById('map-area');
@@ -35,8 +32,8 @@ function saveUserId() {
     canvasError.style.display='none';
 }
 
-//canvasButton.addEventListener('click', saveUserId);
-myCanvas.canvasButton.addEventListener('click', saveUserId);
+canvasButton.addEventListener('click', saveUserId);
+//myCanvas.canvasButton.addEventListener('click', saveUserId);
 
 function timerGlobal() {
 
