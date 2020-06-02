@@ -18,8 +18,8 @@ class ResaModel {
     this.seconds;
     this.timer = document.getElementById('timer');
     this.canvasError = document.getElementById('canvasErrorMsg');
-    this.initialTime = 1200;
-    this.counter = 0;
+    this.initialTime = 12;
+    this.counter = null;
     this.localCounter = sessionStorage.getItem('counter');
     this.checkStorageAndClickEvent();
     } // fin du constructor
@@ -40,6 +40,7 @@ class ResaModel {
             this.surname.value = this.localSurname;
         }
         if (sessionStorage.getItem('counter') !== null) {
+            console.log('a');
             this.validResa();
         }
         veloCanvas.canvasButton.addEventListener('click', () => {
@@ -47,7 +48,6 @@ class ResaModel {
             this.saveUserId();
         })
         this.validCanvasButton.addEventListener('click', () => this.checkCanvas()); 
-        //this.validCanvasButton.addEventListener('click', this.checkCanvas());
         this.cancelResaButton.addEventListener('click', () => this.cancelResa());
     }
     saveUserId() {
@@ -55,18 +55,23 @@ class ResaModel {
         localStorage.setItem('surname', this.surname.value); // recupere le contenu de surname
         veloCanvas.canvasContainer.style.display='block';
         veloCanvas.canvasError.style.display='none';
+        
     }
     checkCanvas() {
         if(veloCanvas.canvas.toDataURL() == veloCanvas.blankCanvas) { // compare un canvas blanc superposée. si le canvas est vide, affiche un message error.
             veloCanvas.canvasError.style.display='block';
-        } 
-        else this.validResa();
+        }
+        else {
+            sessionStorage.setItem('station_address', veloMap.station.address.toLowerCase());
+            sessionStorage.setItem('station_name', veloMap.station.name.toLowerCase());
+            this.validResa();
+        }
     }
     /***************** methodes du timer ***********************/
     convertSeconds(s) {
-        this.minutes = Math.floor(s / 60); // on invoque la methode floor de l'objet math pour recuperer seulement un nombre entier
-        this.seconds = s % 60; // on recupere le reste du nombre entier 
-        return this.minutes + ':' + this.seconds;
+        veloResa.minutes = Math.floor(s / 60); // on invoque la methode floor de l'objet math pour recuperer seulement un nombre entier
+        veloResa.seconds = s % 60; // on recupere le reste du nombre entier 
+        return veloResa.minutes + ':' + veloResa.seconds;
     }
     endTimer() {
         sessionStorage.clear();
@@ -76,18 +81,18 @@ class ResaModel {
     }
     countx() {
         if (sessionStorage.getItem('counter') == 0) { // quand le counter = 0 , le set [setInterval] se termine
-            clearInterval(this.interval);
+            clearInterval(veloResa.interval);
             setTimeout(() => {alert("Les 20 minutes sont écoulées. Vous pouvez à nouveau réserver un vélo."), 1000}); // trigger un message alert après une seconde pour informer l'utilisateur
             sessionStorage.clear();
-            this.endTimer();
+            veloResa.endTimer();
         }
         else if (sessionStorage.getItem('counter') !== null) { // si la mémoire de sessionStorage n'est pas nul, partir de là.
             sessionStorage.setItem('counter', sessionStorage.getItem('counter') -1); // soustrait -1 directement dans le storage de la key 'counter'
-            this.timer.innerHTML = myResa.convertSeconds(sessionStorage.getItem('counter')); // affiche le compteur à l'utilisateur
+            this.timer.innerHTML = veloResa.convertSeconds(sessionStorage.getItem('counter')); // affiche le compteur à l'utilisateur
         }
-        else { // si la mémoire est vide, counter vaut initialTime
-            sessionStorage.setItem('counter',  this.initialTime);
-            this.timer.innerHTML = this.convertSeconds(sessionStorage.getItem('counter'));
+        else if (sessionStorage.getItem('counter') === null) { // si la mémoire est vide, counter vaut initialTime
+            sessionStorage.setItem('counter',  veloResa.initialTime);
+            this.timer.innerHTML = veloResa.convertSeconds(sessionStorage.getItem('counter'));
         }
     }
     startTimer() {
@@ -95,10 +100,7 @@ class ResaModel {
     }
     /******************************************************************************************************************************/
     validResa() {
-        console.log(veloMap.station);
         this.canvasError.style.display='none';
-        sessionStorage.setItem('station_address', veloMap.station.address.toLowerCase());
-        sessionStorage.setItem('station_name', veloMap.station.name.toLowerCase());
         this.chatbox_station.innerHTML = sessionStorage.getItem('station_name');
         this.chatbox_address.innerHTML = sessionStorage.getItem('station_address');
         this.chatbox_name.innerHTML = localStorage.getItem('name');
