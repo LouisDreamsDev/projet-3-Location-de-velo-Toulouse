@@ -2,7 +2,7 @@ class MapModel {
     constructor () {
         this.lat = 43.60426;
         this.lon = 1.44367;
-        this.zoom = 13;
+        this.zoom = 16;
         this.macarte = L.map('map',{scrollWheelZoom: false}).setView([this.lat, this.lon], this.zoom);
         this.tilelayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png').addTo(this.macarte);
         this.ajaxUrl = "https://api.jcdecaux.com/vls/v1/stations?contract=toulouse&apiKey=110bb2109635584660d15785866f72ba75aa09d8";
@@ -53,9 +53,8 @@ class MapModel {
             popupAnchor:  [1, -34],
         });
         this.mapInteract();
-        //this.ajaxOK();
     } // fin du constructor
-    ajaxGet(url, callback) {    
+    ajaxGet(url, callback) {
         let xhr = new XMLHttpRequest();
         xhr.open("GET", url);
         xhr.responseType = "json";
@@ -70,16 +69,6 @@ class MapModel {
             }
         }
     }
-    /*
-    ajaxOK() {
-        this.ajaxGet(this.ajaxUrl, (response) => {
-            this.stations = response;
-        console.log(this.stations);
-
-        })
-        console.log(this.stations);
-    }
-    */
     mapInteract() {
         this.ajaxGet(this.ajaxUrl, (response) => {
             this.stations = response;
@@ -127,5 +116,5 @@ class MapModel {
             veloMap.macarte.addLayer(veloMap.markerClusters);
             });
         })
-    } 
+    }
 }

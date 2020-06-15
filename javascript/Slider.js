@@ -1,8 +1,7 @@
 class SliderModel {
-    constructor(images, sliderIndex, i, playButton, stopButton, leftButton, rightButton) {
+    constructor() {
         this.images = document.getElementsByClassName("slider-image");
         this.sliderIndex = 0;
-        this.i;
         this.playButton = document.getElementById('play-button');
         this.stopButton = document.getElementById('stop-button');
         this.leftButton = document.getElementById('left-arrow');
@@ -12,7 +11,7 @@ class SliderModel {
         this.autoPlay();
     } // fin du constructor
     listenUserKey() {
-        document.body.addEventListener('listenUserKey', (e) => {
+        document.body.addEventListener('keydown', (e) => {
         if (e.keyCode == 37) {
             this.leftSlide();
         }
@@ -22,31 +21,31 @@ class SliderModel {
         })
     }
     listenClickOnButton() {
-        this.leftButton.addEventListener('click', () => { 
+        this.leftButton.addEventListener('click', () => {
             this.leftSlide();
         })
-        this.rightButton.addEventListener('click', () => { 
+        this.rightButton.addEventListener('click', () => {
             this.rightSlide();
         })
-        this.stopButton.addEventListener('click', () => { 
+        this.stopButton.addEventListener('click', () => {
             this.stopSlide();
         })
-        this.playButton.addEventListener('click', () => { 
+        this.playButton.addEventListener('click', () => {
             this.replaySlide();
         })
     }
     autoPlay() {
-        this.chrono = setInterval (() => this.diaporama(), 5000);
+        this.chrono = setInterval (() => this.diaporama(), 4000);
     }
     diaporama() {
-    for(this.i = 0; this.i < this.images.length; this.i++) {
-        this.images[this.i].style.display = "none";
-    }
-    this.sliderIndex++;
-    if (this.sliderIndex > this.images.length) {
-        this.sliderIndex = 1;
-    }
-    this.images[this.sliderIndex-1].style.display = "block";
+        for(let i = 0; i < this.images.length; i++) {
+            this.images[i].style.display = "none";
+        }
+        this.sliderIndex++;
+        if (this.sliderIndex > this.images.length) {
+            this.sliderIndex = 1;
+        }
+        this.images[this.sliderIndex-1].style.display = "block";
     }
     stopSlide() {
         clearInterval(this.chrono);
@@ -60,14 +59,14 @@ class SliderModel {
     }
     leftSlide() {
         this.stopSlide();
-        for (this.i = 0; this.i < this.images.length; this.i++) {
-        this.images[this.i].style.display = "none";
+        for (let i = 0; i < this.images.length; i++) {
+            this.images[i].style.display = "none";
         }
         if (this.sliderIndex == 0) {
-        this.sliderIndex = this.images.length-1; 
+            this.sliderIndex = this.images.length-1;
         }
         else {
-        this.sliderIndex--;
+            this.sliderIndex--;
         }
         this.images[this.sliderIndex].style.display = "block";
     }

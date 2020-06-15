@@ -6,6 +6,7 @@ class ResaModel {
     this.localSurname = localStorage.getItem('surname');
     this.mapSection = document.getElementById('map-area');
     this.sliderSection = document.getElementById('slider-area');
+    this.detailsWindow = document.getElementById('details-window');
     this.validCanvasButton = document.getElementById('valid-button');
     this.prefooter = document.getElementById('pre-footer');
     this.chatbox_station = document.getElementById('chatbox-station-name');
@@ -13,12 +14,14 @@ class ResaModel {
     this.chatbox_name = document.getElementById('chatbox-stored-user-name');
     this.chatbox_surname = document.getElementById('chatbox-stored-user-surname');
     this.cancelResaButton = document.getElementById('cancel-button');
-    // declaration des variables du timer
+    this.canvasError = document.getElementById('canvasErrorMsg');
+    this.cancelResaBox = document.getElementById('cancel-resa-box');
+    this.confirmCancelButton = document.getElementById('confirm-cancel');
+    this.noCancelButton = document.getElementById('no-cancel');
+    this.timer = document.getElementById('timer');
     this.minutes;
     this.seconds;
-    this.timer = document.getElementById('timer');
-    this.canvasError = document.getElementById('canvasErrorMsg');
-    this.initialTime = 12;
+    this.initialTime = 1200;
     this.counter = null;
     this.localCounter = sessionStorage.getItem('counter');
     this.checkStorageAndClickEvent();
@@ -40,22 +43,26 @@ class ResaModel {
             this.surname.value = this.localSurname;
         }
         if (sessionStorage.getItem('counter') !== null) {
-            console.log('a');
             this.validResa();
         }
         veloCanvas.canvasButton.addEventListener('click', () => {
-            veloCanvas.canvasContainer.style.display='block';
-            this.saveUserId();
+            this.checkForm();
         })
-        this.validCanvasButton.addEventListener('click', () => this.checkCanvas()); 
+        this.validCanvasButton.addEventListener('click', () => this.checkCanvas());
         this.cancelResaButton.addEventListener('click', () => this.cancelResa());
+    }
+    checkForm() {
+        if (this.name.value && this.surname.value != "") {
+            this.saveUserId();
+            veloCanvas.canvasContainer.style.display='block';
+        }
     }
     saveUserId() {
         localStorage.setItem('name', this.name.value); // recupere le contenu de name
         localStorage.setItem('surname', this.surname.value); // recupere le contenu de surname
         veloCanvas.canvasContainer.style.display='block';
         veloCanvas.canvasError.style.display='none';
-        
+
     }
     checkCanvas() {
         if(veloCanvas.canvas.toDataURL() == veloCanvas.blankCanvas) { // compare un canvas blanc superposée. si le canvas est vide, affiche un message error.
@@ -70,21 +77,26 @@ class ResaModel {
     /***************** methodes du timer ***********************/
     convertSeconds(s) {
         veloResa.minutes = Math.floor(s / 60); // on invoque la methode floor de l'objet math pour recuperer seulement un nombre entier
-        veloResa.seconds = s % 60; // on recupere le reste du nombre entier 
+        veloResa.seconds = s % 60; // on recupere le reste du nombre entier
         return veloResa.minutes + ':' + veloResa.seconds;
     }
-    endTimer() {
+    endTimerAndReset() {
         sessionStorage.clear();
         this.mapSection.style.display='block';
         this.prefooter.style.display='none';
         this.sliderSection.style.display='block';
+        this.detailsWindow.style.display='none';
+        veloCanvas.clearDraw();
+        this.name.value = this.localName;
+        this.surname.value = this.localSurname;
     }
     countx() {
         if (sessionStorage.getItem('counter') == 0) { // quand le counter = 0 , le set [setInterval] se termine
             clearInterval(veloResa.interval);
             setTimeout(() => {alert("Les 20 minutes sont écoulées. Vous pouvez à nouveau réserver un vélo."), 1000}); // trigger un message alert après une seconde pour informer l'utilisateur
             sessionStorage.clear();
-            veloResa.endTimer();
+            localStorage.clear();
+            veloResa.endTimerAndReset();
         }
         else if (sessionStorage.getItem('counter') !== null) { // si la mémoire de sessionStorage n'est pas nul, partir de là.
             sessionStorage.setItem('counter', sessionStorage.getItem('counter') -1); // soustrait -1 directement dans le storage de la key 'counter'
@@ -100,6 +112,7 @@ class ResaModel {
     }
     /******************************************************************************************************************************/
     validResa() {
+        this.saveUserId();
         this.canvasError.style.display='none';
         this.chatbox_station.innerHTML = sessionStorage.getItem('station_name');
         this.chatbox_address.innerHTML = sessionStorage.getItem('station_address');
@@ -108,21 +121,18 @@ class ResaModel {
         this.prefooter.style.display='block';
         this.mapSection.style.display='none';
         this.sliderSection.style.display='none';
+        this.cancelResaBox.style.display="none";
         window.scrollBy(0, -1000);
         this.startTimer();
     }
     cancelResa() {
-        if (confirm("Êtes-vous sûr d'annuler votre réservation? Cette action est irréversible. Toutes les données seront effacées !")) {
-            alert("Votre réservation a ete annulée avec succès");
-            this.mapSection.style.display='block';
-            this.prefooter.style.display='none';
-            this.sliderSection.style.display='block';
-            localStorage.clear();
-            sessionStorage.clear();
-        }
-        else {
-            alert("votre réservation n'a pas été annulée. Les données sont conservées.");
-        }
+        this.cancelResaBox.style.display="block";
+        this.confirmCancelButton.addEventListener('click', () => {
+            clearInterval(veloResa.interval);
+            this.endTimerAndReset();
+        });
+        this.noCancelButton.addEventListener('click', () => {
+            this.cancelResaBox.style.display="none";
+        });
     }
 }
-

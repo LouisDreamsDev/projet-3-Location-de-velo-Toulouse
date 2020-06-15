@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'alatsi';
-  src: url('../Typographies/alatsi/Alatsi-Regular.ttf') format('truetype');
+  src: url('../typographies/alatsi/Alatsi-Regular.ttf') format('truetype');
 }
 @font-face {
   font-family: '3-dumb';
-  src: url('../Typographies/3dumb/3Dumb.ttf') format('truetype');
+  src: url('../typographies/3dumb/3Dumb.ttf') format('truetype');
 }
 * {
 	font-family: 'alatsi', Arial, sans-serif;
@@ -49,9 +49,9 @@ header {
 	background-color: #a40c18;
 	border-bottom: solid 8px #f8cd09;
 	font-weight: bold;
-	z-index: 4100;
+	z-index: 4444;
 }
-ul.list-nav li a:hover {
+ul#list-nav li a:hover {
   border-bottom: solid 2px #f8cd09;
 }
 #menu-navigation ul {
@@ -61,7 +61,7 @@ ul.list-nav li a:hover {
 	list-style-type: none;
 	padding: 20px 40px 20px 20px;
 }
-ul.list-nav li a {
+ul#list-nav li a {
 	font-size: 1.1em;
 	color: white;
 	text-decoration: none;
@@ -71,9 +71,12 @@ ul.list-nav li a {
 	border-radius: 4px;
 	padding: 10px;
 }
+#boxoverall {
+    display: none;
+}
 #main-title {
 	font-size: 4em;
-  text-align: center;
+    text-align: center;
 	margin: 200px 0 40px 0;
 	font-family: '3-dumb', Arial, sans-serif;
 	text-decoration: underline;
@@ -84,7 +87,7 @@ h2 {
 	text-align: center;
 	margin: 0 0 40px 0;
 }
-#slider-container	{
+#slider-container {
 	width: 800px;
 	height: 652px;
 	margin: auto;
@@ -136,7 +139,7 @@ figure figcaption.add-width {
 	align-items: center;
 	border-top: solid 4px #f8cd09;
 }
-#slider-bloc-icon button {
+#slider-bloc-icon a {
 	border: none;
 	color: #a40c18;
 }
@@ -144,8 +147,9 @@ figure figcaption.add-width {
 	padding: 10px;
 	font-size: 2em;
 }
-#stop-button {
-	font-size: 0.8em;
+.button-set {
+    font-size: 0.8em;
+    border-radius: 10px;;
 }
 #play-button {
 	display: none;
@@ -153,7 +157,7 @@ figure figcaption.add-width {
 #map-title {
 	font-size: 1.7em;
 }
-#map-subtitle {	
+#map-subtitle {
 	font-size: 1.2em;
 	text-align: center;
 	margin: 60px 0 60px 0;
@@ -206,7 +210,7 @@ form {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    
+
 }
 #line-break-flexbox {
     flex: 100%;
@@ -266,12 +270,16 @@ form {
     font-size: 0.7em;
 }
 #timer {
-	font-size: 1.5em;
+	font-size: 2.5em;
 	color: #a40c18;
 	background-color: white;
 }
-#cancel-button {
+.cancel-button {
 	padding: 8px;
+    border-radius: 8px;
+}
+#cancel-resa-box {
+    display: none;
 }
 footer {
 	width: 100%;
