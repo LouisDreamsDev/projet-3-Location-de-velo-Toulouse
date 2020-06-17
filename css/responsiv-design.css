@@ -3,13 +3,20 @@
 1 colonne pour les smartphones
 display reduit pour les tablettes
 */
-
+/* pour les smartphones allant jusqu'a 600px de longueur; */
 @media only screen and (max-width: 600px) {
 	#div-all {
 		width: auto;
 	}
+	header {
+		height: 70px;
+	}
+	#menu-navigation {
+		margin: auto;
+	}
 	#list-nav {
 		font-size: 0.8em;
+		padding-left: 0;
 	}
 	#menu-navigation ul li {
 		padding: 10px 10px 10px 10px;
@@ -17,9 +24,12 @@ display reduit pour les tablettes
 	#logo-clic img {
 		display: none;
 	}
+	#main-title {
+		margin-top: 110px;
+	}
 	#slider-container {
 		width: 300px;
-		height: 400px;;
+		height: 400px;
 	}
 	figure.slider-image img {
 		margin: auto;
@@ -33,22 +43,53 @@ display reduit pour les tablettes
 	#slider-bloc-icon {
 		width: 300px;
 	}
-	#gobal-sec-map {
-		flex-direction: column;
+	#legend-list {
+		flex-wrap: wrap;
+		padding: 0;
+	}
+	#global-map {
+		display: block;
 	}
 	#map {
 		margin: auto;
-		height: 400px;
+		height: 500px;
 	}
-	#details-station {
+	#details-window {
 		margin: auto;
-		width: auto;
+		width: 90.5%;
 	}
 }
-
+/* pour les tablettes allant jusqu'a 840px de longeur */
 @media (min-width: 601px) and (max-width: 840px) {
-	.slider-image {
+	#slider-container {
+		width: 500px;
+		height: 452px;
+	}
+	figure.slider-image img {
 		margin: auto;
-		width: 300px;
+		width: 500px;
+		height: 400px;
+	}
+	figure figcaption {
+		top: 220px;
+		left: 35px;
+	}
+	#slider-bloc-icon {
+		width: 500px;
+	}
+	#legend-list {
+		flex-wrap: wrap;
+		padding: 0;
+	}
+	#global-map {
+		display: block;
+	}
+	#map {
+		margin: auto;
+		height: 500px;
+	}
+	#details-window {
+		margin: auto;
+		width: 91%;
 	}
 }

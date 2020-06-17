@@ -26,12 +26,12 @@ class ResaModel {
     this.localCounter = sessionStorage.getItem('counter');
     this.checkStorageAndClickEvent();
     } // fin du constructor
-    goFurther() {
+    goFurther() { // affiche les inputs
         veloResa.name.style.display='block';
         veloResa.surname.style.display='block';
         veloCanvas.canvasButton.style.display='block';
     }
-    dontGoFurther() {
+    dontGoFurther() { // faiat disparaitre les inputs
         veloResa.name.style.display='none';
         veloResa.surname.style.display='none';
         veloCanvas.canvasButton.style.display='none';
@@ -42,7 +42,7 @@ class ResaModel {
             this.name.value = this.localName;
             this.surname.value = this.localSurname;
         }
-        if (sessionStorage.getItem('counter') !== null) {
+        if (sessionStorage.getItem('counter') !== null) { // poursuit le compteur si il est en fonction
             this.validResa();
         }
         veloCanvas.canvasButton.addEventListener('click', () => {
@@ -51,7 +51,7 @@ class ResaModel {
         this.validCanvasButton.addEventListener('click', () => this.checkCanvas());
         this.cancelResaButton.addEventListener('click', () => this.cancelResa());
     }
-    checkForm() {
+    checkForm() { // check si string
         if (this.name.value && this.surname.value != "") {
             this.saveUserId();
             veloCanvas.canvasContainer.style.display='block';
@@ -102,7 +102,7 @@ class ResaModel {
             sessionStorage.setItem('counter', sessionStorage.getItem('counter') -1); // soustrait -1 directement dans le storage de la key 'counter'
             this.timer.innerHTML = veloResa.convertSeconds(sessionStorage.getItem('counter')); // affiche le compteur à l'utilisateur
         }
-        else if (sessionStorage.getItem('counter') === null) { // si la mémoire est vide, counter vaut initialTime
+        else if (sessionStorage.getItem('counter') === null) { // si la mémoire est vide, counter vaut initialTime [1200]
             sessionStorage.setItem('counter',  veloResa.initialTime);
             this.timer.innerHTML = veloResa.convertSeconds(sessionStorage.getItem('counter'));
         }
@@ -111,7 +111,7 @@ class ResaModel {
         this.interval = setInterval(this.countx, 1000); // on lance la fonction countx toute les secondes a l'infini
     }
     /******************************************************************************************************************************/
-    validResa() {
+    validResa() { // affiche le prefooter et lance le timer + retour en haut de page
         this.saveUserId();
         this.canvasError.style.display='none';
         this.chatbox_station.innerHTML = sessionStorage.getItem('station_name');
@@ -122,10 +122,10 @@ class ResaModel {
         this.mapSection.style.display='none';
         this.sliderSection.style.display='none';
         this.cancelResaBox.style.display="none";
-        window.scrollBy(0, -1000);
+        window.scrollBy(0, -1000); // retour en haut de la page
         this.startTimer();
     }
-    cancelResa() {
+    cancelResa() { // interactions pour l'annulation
         this.cancelResaBox.style.display="block";
         this.confirmCancelButton.addEventListener('click', () => {
             clearInterval(veloResa.interval);

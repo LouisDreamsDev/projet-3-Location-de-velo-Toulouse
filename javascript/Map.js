@@ -13,9 +13,8 @@ class MapModel {
         this.stationPotentialBikes = document.getElementById('info-station-bikes-potential');
         this.stationAvailableBikes = document.getElementById('info-station-bikes');
         this.marker;
-        this.markerClusters = L.markerClusterGroup();
+        this.markerClusters = L.markerClusterGroup(); // fonction leaflet des clusters
         this.stations;
-        this.station;
         this.greenIcon = new L.Icon({
             iconUrl: 'img/icons/greenIcon.png',
             shadowUrl: 'img/icons/marker-shadowIcon.png',
@@ -54,25 +53,24 @@ class MapModel {
         });
         this.mapInteract();
     } // fin du constructor
-    ajaxGet(url, callback) {
-        let xhr = new XMLHttpRequest();
+    ajaxGet(url, callback) { // methode ajax
+        let xhr = new XMLHttpRequest(); // creation de la requete
         xhr.open("GET", url);
-        xhr.responseType = "json";
-        xhr.send();
-        xhr.onreadystatechange = () => {
+        xhr.responseType = "json"; // demande du format json
+        xhr.send(); // on envoie
+        xhr.onreadystatechange = () => { // si tout est ok, on poursuit
             if (xhr.readyState == xhr.DONE && xhr.status == 200) {
                 callback(xhr.response);
-
-            }
+            } // si different de OK, message d'erreur
             else if (xhr.readyState ==! 4 && this.status ==! 200) {
                 console.log("error - " + xhr.status +  " " + xhr.readyState);
             }
         }
     }
     mapInteract() {
-        this.ajaxGet(this.ajaxUrl, (response) => {
-            this.stations = response;
-            this.stations.forEach(station => {
+        this.ajaxGet(this.ajaxUrl, (response) => { // on vient recuperer les donnees avec ajax
+            this.stations = response; // on les mets dans this.stations
+            this.stations.forEach(station => { // foreach() = pour chaque station on :
                 if(station.status === "OPEN" && station.available_bikes >= 4) { // si ouvert et velos >= 4 = icone verte
                 veloMap.marker = L.marker([station.position.lat, station.position.lng], {icon: veloMap.greenIcon});
                 }
@@ -88,7 +86,7 @@ class MapModel {
                 veloMap.marker.addEventListener('click', () => { // ecoute au clic des markers et affiche les infos de la station selectionnee
                     this.detailsWindow.style.display="block";
                     veloResa.dontGoFurther();
-                    if (station.status === "OPEN" && station.available_bikes >= 1) {
+                    if (station.status === "OPEN" && station.available_bikes >= 1) { // on affiche les inputs si il y a des velos
                         this.statutStation.innerHTML = "Station ouverte";
                         this.stationName.innerHTML = station.name.toLowerCase();
                         this.stationAddress.innerHTML = station.address.toLowerCase();
@@ -97,6 +95,7 @@ class MapModel {
                         veloMap.station = station;
                         veloResa.goFurther();
                     }
+                    // on masque les inputs si il n'y a pas de velo [pour empecher une reservation a une station vide]
                     else if (station.status === "OPEN" && station.available_bikes === 0) {
                         this.statutStation.innerHTML = "Station vide. Impossible de réserver.";
                         this.stationName.innerHTML = station.name.toLowerCase();

@@ -5,10 +5,10 @@ class CanvasModel {
         this.canvas = document.getElementById('canvas');
         this.ctx = canvas.getContext('2d');
         this.clearButton = document.getElementById('clear-button');
-        this.painting = false;
+        this.painting = false; // booleen qui definit si user dessine ou pas
         this.blankCanvas = canvas.toDataURL();
         this.canvasError = document.getElementById('canvasErrorMsg');
-        this.triggerCanvas();
+        this.triggerCanvas(); //
     } // fin du constructor
     startDraw(e) {
         veloCanvas.painting = true;
@@ -16,30 +16,30 @@ class CanvasModel {
     }
     stopDraw() {
         veloCanvas.painting = false;
-        veloCanvas.ctx.beginPath();
+        veloCanvas.ctx.beginPath(); // echappe la souris si user stop clic
     }
     drawing(e) {
-        if(!veloCanvas.painting) return;
-        veloCanvas.ctx.lineWidth = 4;
-        veloCanvas.ctx.lineCap = 'round';
-        veloCanvas.ctx.lineTo(e.offsetX, e.offsetY);
-        veloCanvas.ctx.stroke();
-        veloCanvas.ctx.beginPath();
-        veloCanvas.ctx.moveTo(e.offsetX, e.offsetY);
+        if(!veloCanvas.painting) return; // si painting != true, on arrete drawing()
+        veloCanvas.ctx.lineWidth = 4; // largeur du trait
+        veloCanvas.ctx.lineCap = 'round'; // forme du trait
+        veloCanvas.ctx.lineTo(e.offsetX, e.offsetY); // defini une ligne avec les coordonnees de la souris
+        veloCanvas.ctx.stroke(); // dessine les contours [fill() rempli]
+        veloCanvas.ctx.beginPath(); // coordonnees de depart du dessin
+        veloCanvas.ctx.moveTo(e.offsetX, e.offsetY); // deplace le trait en fonction des mouvements de la souris
     }
-    clearDraw() {
+    clearDraw() { // nettoie le canvas au clic du bouton effacer
         veloCanvas.clearButton = veloCanvas.ctx.clearRect(0, 0, veloCanvas.canvas.width, veloCanvas.canvas.height);
     }
-    triggerCanvas() {
+    triggerCanvas() { // initie le canvas
         window.addEventListener('load', () => {
             this.canvas.width = 300;
             this.canvas.height = 150;
             this.listenSignature();
         })
     }
-    listenSignature() {
-        this.canvas.addEventListener('mousedown', this.startDraw);
-        this.canvas.addEventListener('mouseup', this.stopDraw);
+    listenSignature() { // on ecoute les interractions souris avec le canvas
+        this.canvas.addEventListener('mousedown', this.startDraw); // ecrit si user clic [et maintient]
+        this.canvas.addEventListener('mouseup', this.stopDraw); // arrete si user stop clic
         this.canvas.addEventListener('mouseleave', this.stopDraw);
         this.canvas.addEventListener('mousemove',  this.drawing);
         this.clearButton.addEventListener('click', this.clearDraw);

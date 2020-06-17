@@ -11,7 +11,7 @@ class SliderModel {
         this.autoPlay();
     } // fin du constructor
     listenUserKey() {
-        document.body.addEventListener('keydown', (e) => {
+        document.body.addEventListener('keydown', (e) => { // ecoute les touches droites et gauches du clavier
         if (e.keyCode == 37) {
             this.leftSlide();
         }
@@ -20,7 +20,7 @@ class SliderModel {
         }
         })
     }
-    listenClickOnButton() {
+    listenClickOnButton() { // ecoute les clics boutons
         this.leftButton.addEventListener('click', () => {
             this.leftSlide();
         })
@@ -34,30 +34,30 @@ class SliderModel {
             this.replaySlide();
         })
     }
-    autoPlay() {
-        this.chrono = setInterval (() => this.diaporama(), 4000);
+    autoPlay() { // lance le defilement automatiques des images toutes les 5 secondes
+        this.chrono = setInterval (() => this.diaporama(), 5000);
     }
     diaporama() {
         for(let i = 0; i < this.images.length; i++) {
             this.images[i].style.display = "none";
         }
-        this.sliderIndex++;
-        if (this.sliderIndex > this.images.length) {
+        this.sliderIndex++; // sliderIndex compte les img
+        if (this.sliderIndex > this.images.length) { // si on atteint la derniere img, revient a la 1ere
             this.sliderIndex = 1;
         }
         this.images[this.sliderIndex-1].style.display = "block";
     }
-    stopSlide() {
+    stopSlide() { // arrete le chrono et switch les boutons stop et play
         clearInterval(this.chrono);
         this.stopButton.style.display="none";
         this.playButton.style.display="block";
     }
-    replaySlide() {
+    replaySlide() { // re switch les boutons et relance le defilemetn auto
         this.stopButton.style.display="block";
         this.playButton.style.display="none";
         this.autoPlay();
     }
-    leftSlide() {
+    leftSlide() { // fonction inverse de diaporama()
         this.stopSlide();
         for (let i = 0; i < this.images.length; i++) {
             this.images[i].style.display = "none";
