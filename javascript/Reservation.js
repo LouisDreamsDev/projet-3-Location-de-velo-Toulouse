@@ -8,6 +8,7 @@ class ResaModel {
     this.sliderSection = document.getElementById('slider-area');
     this.detailsWindow = document.getElementById('details-window');
     this.validCanvasButton = document.getElementById('valid-button');
+    this.regexp = /^[a-zA-Z]+$/;
     this.prefooter = document.getElementById('pre-footer');
     this.chatbox_station = document.getElementById('chatbox-station-name');
     this.chatbox_address = document.getElementById('chatbox-station-adress');
@@ -51,10 +52,13 @@ class ResaModel {
         this.validCanvasButton.addEventListener('click', () => this.checkCanvas());
         this.cancelResaButton.addEventListener('click', () => this.cancelResa());
     }
-    checkForm() { // check si string
-        if (this.name.value && this.surname.value != "") {
+    checkForm() { // check si string et pas caracctères spéciaux / nombres
+        if (this.name.value.match(this.regexp) && this.surname.value.match(this.regexp)) {
             this.saveUserId();
             veloCanvas.canvasContainer.style.display='block';
+        }
+        else {
+            alert("Caractères invalides. Veuillez réessayer.")
         }
     }
     saveUserId() {

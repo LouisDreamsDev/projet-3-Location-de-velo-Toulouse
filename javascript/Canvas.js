@@ -13,12 +13,15 @@ class CanvasModel {
     startDraw(e) {
         veloCanvas.painting = true;
         veloCanvas.drawing(e);
+        console.log('a');
     }
     stopDraw() {
         veloCanvas.painting = false;
         veloCanvas.ctx.beginPath(); // echappe la souris si user stop clic
+        console.log('b');
     }
     drawing(e) {
+        console.log('c');
         if(!veloCanvas.painting) return; // si painting != true, on arrete drawing()
         veloCanvas.ctx.lineWidth = 4; // largeur du trait
         veloCanvas.ctx.lineCap = 'round'; // forme du trait
@@ -43,6 +46,13 @@ class CanvasModel {
         this.canvas.addEventListener('mouseleave', this.stopDraw);
         this.canvas.addEventListener('mousemove',  this.drawing);
         this.clearButton.addEventListener('click', this.clearDraw);
+        // pour les utilisateurs sur écrans tactiles :
+        this.canvas.addEventListener('touchstart', this.startDraw); // ecrit si user touche [et maintient]
+        this.canvas.addEventListener('touchmove', this.drawing);
+        this.canvas.addEventListener('touchend', this.stopDraw);
+
+
+
     }
 
 }
