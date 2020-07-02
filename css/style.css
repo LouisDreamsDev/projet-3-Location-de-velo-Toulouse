@@ -177,20 +177,19 @@ figure figcaption.add-width {
 	align-items: center;
 }
 #global-map {
-	display: flex;
+	/*display: flex;*/
 	width: 94%;
 	margin: auto;
 }
 #map {
 	height: 800px;
-	width: 93%;
+
 	border: double 12px #a40c18;
 	border-radius: 8px;
 	z-index: 2;
 	margin: auto;
 }
 #details-window {
-	width: 35%;
 	height: 816px;
 	max-height: 820px;
 	margin: 0 0 0 10px;
@@ -204,7 +203,7 @@ figure figcaption.add-width {
 	text-align: center;
 }
 #details-window button {
-    border-radius: 10px;;
+    border-radius: 10px;
 }
 form {
     display: flex;
@@ -229,7 +228,7 @@ form {
 #canvasContainer {
 	margin: auto;
 	text-align: center;
-	display: none;
+	/*display: none;*/
 }
 #canvas {
 	display: block;

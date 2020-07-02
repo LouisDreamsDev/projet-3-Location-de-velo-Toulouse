@@ -85,7 +85,7 @@ class MapModel {
                 }
                 veloMap.marker.addEventListener('click', () => { // ecoute au clic des markers et affiche les infos de la station selectionnee
                     this.detailsWindow.style.display="block";
-                    veloResa.dontGoFurther();
+                    //veloResa.dontGoFurther();
                     if (station.status === "OPEN" && station.available_bikes >= 1) { // on affiche les inputs si il y a des velos
                         this.statutStation.innerHTML = "Station ouverte";
                         this.stationName.innerHTML = station.name.toLowerCase();
@@ -93,7 +93,7 @@ class MapModel {
                         this.stationPotentialBikes.innerHTML = station.available_bike_stands;
                         this.stationAvailableBikes.innerHTML = station.available_bikes;
                         veloMap.station = station;
-                        veloResa.goFurther();
+                        //veloResa.goFurther();
                     }
                     // on masque les inputs si il n'y a pas de velo [pour empecher une reservation a une station vide]
                     else if (station.status === "OPEN" && station.available_bikes === 0) {
@@ -102,13 +102,13 @@ class MapModel {
                         this.stationAddress.innerHTML = station.address.toLowerCase();
                         this.stationPotentialBikes.innerHTML = station.available_bike_stands;
                         this.stationAvailableBikes.innerHTML = station.available_bikes;
-                        veloResa.dontGoFurther();
+                        //veloResa.dontGoFurther();
                     }
                     else if (station.status === "CLOSED") {
                         station.status = "Station fermée. Impossible de réserver.";
                         this.stationName.innerHTML = station.name.toLowerCase();
                         this.stationAddress.innerHTML = station.address.toLowerCase();
-                        veloResa.dontGoFurther();
+                        //veloResa.dontGoFurther();
                     };
                 });
             veloMap.markerClusters.addLayer(veloMap.marker);
