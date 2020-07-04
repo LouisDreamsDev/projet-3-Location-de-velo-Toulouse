@@ -177,13 +177,13 @@ figure figcaption.add-width {
 	align-items: center;
 }
 #global-map {
-	/*display: flex;*/
+	display: flex;
 	width: 94%;
 	margin: auto;
 }
 #map {
 	height: 800px;
-
+	width: 93%;
 	border: double 12px #a40c18;
 	border-radius: 8px;
 	z-index: 2;
@@ -191,6 +191,7 @@ figure figcaption.add-width {
 }
 #details-window {
 	height: 816px;
+	width: 31%;
 	max-height: 820px;
 	margin: 0 0 0 10px;
 	border: solid 4px #a40c18;
@@ -228,7 +229,7 @@ form {
 #canvasContainer {
 	margin: auto;
 	text-align: center;
-	/*display: none;*/
+	display: none;
 }
 #canvas {
 	display: block;

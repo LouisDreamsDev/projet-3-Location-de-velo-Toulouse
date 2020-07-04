@@ -1,142 +1,89 @@
 class CanvasModel {
 
-    constructor(id) {
-
-        this.canvas = $("#" + id);
-        this.canvasJS = document.getElementById(id);
-        this.id = id;
-        this.clickX = [];
-        this.clickY = [];
-        this.clickDrag = [];
-        this.paint = false;
-        this.context = document.getElementById(id).getContext("2d");
-
-        this.canvas.mousedown((e) => {
-
-            const mouseX = e.clientX - this.canvasJS.getBoundingClientRect().left;
-            const mouseY = e.clientY - this.canvasJS.getBoundingClientRect().top;
-            this.paint = true;
-
-            this.addClick(mouseX, mouseY);
-            this.redraw();
-        });
-
-
-        this.canvas.mousemove((e) => {
-
-            if (this.paint) {
-
-                const mouseX = e.clientX - this.canvasJS.getBoundingClientRect().left;
-                const mouseY = e.clientY - this.canvasJS.getBoundingClientRect().top;
-
-                this.addClick(mouseX, mouseY, true);
-                this.redraw();
-            }
-        });
-
-        this.canvas.mouseup(() => {
-            this.paint = false;
-        });
-
-        this.canvas.mouseout(() => {
-            this.paint = false;
-        });
-
-        $("#clear" + id).on('click', () => {
-
-            this.clickX = [];
-            this.clickY = [];
-            this.clickDrag = [];
-            this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
-        });
-
-    }
-
-    addClick(x, y, dragging) {
-
-        this.clickX.push(x);
-        this.clickY.push(y);
-        this.clickDrag.push(dragging);
-    }
-
-    redraw() {
-
-        this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
-        this.context.strokeStyle = "#df4b26";
-        this.context.lineJoin = "round";
-        this.context.lineWidth = 5;
-
-        for (let i = 0; i < this.clickX.length; i++) {
-
-            this.context.beginPath();
-            if (this.clickDrag[i] && i) {
-
-                this.context.moveTo(this.clickX[i - 1], this.clickY[i - 1]);
-            } else {
-
-                this.context.moveTo(this.clickX[i] - 1, this.clickY[i]);
-            }
-            this.context.lineTo(this.clickX[i], this.clickY[i]);
-            this.context.closePath();
-            this.context.stroke();
-        }
-    }
-
-    isEmpty() {
-
-        return document.getElementById(this.id).toDataURL() === document.getElementById('emptyCanvas').toDataURL();
-    }
-}
-
-
-class CanvasModel {
     constructor() {
+
         this.canvasButton = document.getElementById('submit-canvas-button');
         this.canvasContainer = document.getElementById('canvasContainer');
         this.canvasElement = document.getElementById('canvas');
-        this.canvasElement.width = 3000;
-        this.canvasElement.height = 1500;
+        this.canvasElement.width = 300;
+        this.canvasElement.height = 150;
         this.canvas = this.canvasElement.getContext('2d');
         this.clearButton = document.getElementById('clear-button');
         this.painting = false; // booleen qui enregistre si user dessine ou pas
         //this.blankCanvas = this.canvasElement.toDataURL();
         this.canvasError = document.getElementById('canvasErrorMsg');
-        this.mousePos;
-        this.rect;
+        this.touching;
         this.listenSignature();
+
     } // fin du constructor
-  
+    startDraw(e) {
+        this.painting = true;
+        veloCanvas.drawing(e);
+    }
+
+    stopDraw() {
+        this.painting = false;
+        veloCanvas.canvas.beginPath(); // echappe la souris si user stop clic
+    }
+
+    drawing(e) { // moteur de la class
+        if(!this.painting) return; // si painting != true, on arrete drawing()
+        veloCanvas.canvas.lineWidth = 4; // largeur du trait
+        veloCanvas.canvas.lineCap = 'round'; // forme du trait
+        veloCanvas.canvas.lineTo(e.offsetX, e.offsetY); // defini une ligne avec les coordonnees de la souris
+        veloCanvas.canvas.stroke(); // dessine les contours [fill() rempli]
+        veloCanvas.canvas.beginPath(); // coordonnees de depart du dessin
+        veloCanvas.canvas.moveTo(e.offsetX, e.offsetY); // deplace le trait en fonction des mouvements de la souris
+    }
+    clearDraw() { // nettoie le canvas au clic du bouton effacer
+        veloCanvas.clearButton = veloCanvas.canvas.clearRect(0, 0, veloCanvas.canvasElement.width, veloCanvas.canvasElement.height);
+    }
+
     listenSignature() { 
+        this.canvasElement.addEventListener('mousedown', this.startDraw);
+        this.canvasElement.addEventListener('mouseup', this.stopDraw);
+        this.canvasElement.addEventListener('mouseleave', this.stopDraw);
+        this.canvasElement.addEventListener('mousemove',  this.drawing);
+        this.clearButton.addEventListener('click', this.clearDraw);
+
     //pour les utilisateurs sur écrans tactiles :
-  
+
         this.canvasElement.addEventListener('touchstart', (e) => {
-            this.drawTouch(e.changedTouches[0].clientX, e.changedTouches[0].screenY);
+            this.touching = true;
+            const mouseX = e.changedTouches[0].clientX - veloCanvas.canvasElement.getBoundingClientRect().left;
+            const mouseY = e.changedTouches[0].clientY - veloCanvas.canvasElement.getBoundingClientRect().top;
+            this.canvas.beginPath();
+            this.drawTouch(mouseX, mouseY);
+            
+            console.log(this.painting);
         });
   
         this.canvasElement.addEventListener('touchmove', (e) => {
+            this.painting = true;
             e.preventDefault();
-            this.mousePos = this.getMousePos(e);
-            console.log(this.mousePos.x);
-            this.drawTouch(e.changedTouches[0].clientX, e.changedTouches[0].screenY);
-            console.log(e.touches);
+            while(this.painting == true) {
+                const mouseX = e.changedTouches[0].clientX - veloCanvas.canvasElement.getBoundingClientRect().left;
+                const mouseY = e.changedTouches[0].clientY - veloCanvas.canvasElement.getBoundingClientRect().top;
+                this.drawTouch(mouseX, mouseY);
+                console.log(mouseX, mouseY);
+                if (mouseX < 0 || mouseX > 300 || mouseY < 0 || mouseY > 150) {
+                    this.stopDraw();
+                }
+                break;
+            }
         });
+        this.canvasElement.addEventListener("touchleave", this.stopDraw);
+        this.canvasElement.addEventListener("touchend", this.stopDraw);
+        this.canvasElement.addEventListener("touchcancel", this.stopDraw);
     }
-    getMousePos(e) {
-        this.rect = veloCanvas.canvasElement.getBoundingClientRect();
-        return {
-          x: e.clientX - this.rect.left,
-          y: e.clientY - this.rect.top
-        };
-    }
-  
+
     drawTouch(x, y) {
-        this.canvas.lineWidth = 9;
-        this.canvas.lineCap = 'square';
+        if (!this.touching) return;
+        this.canvas.lineWidth = 4;
+        this.canvas.lineCap = 'round';
         this.canvas.lineTo(x, y);
         this.canvas.stroke();
         this.canvas.beginPath();
         this.canvas.moveTo(x, y);
     }
   }
-
-
