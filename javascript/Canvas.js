@@ -12,7 +12,6 @@ class CanvasModel {
         this.painting = false; // booleen qui enregistre si user dessine ou pas
         //this.blankCanvas = this.canvasElement.toDataURL();
         this.canvasError = document.getElementById('canvasErrorMsg');
-        this.touching;
         this.listenSignature();
 
     } // fin du constructor
@@ -46,7 +45,7 @@ class CanvasModel {
         this.canvasElement.addEventListener('mousemove',  this.drawing);
         this.clearButton.addEventListener('click', this.clearDraw);
 
-    //pour les utilisateurs sur écrans tactiles :
+    // pour les utilisateurs sur écrans tactiles :
 
         this.canvasElement.addEventListener('touchstart', (e) => {
             this.touching = true;
@@ -54,23 +53,15 @@ class CanvasModel {
             const mouseY = e.changedTouches[0].clientY - veloCanvas.canvasElement.getBoundingClientRect().top;
             this.canvas.beginPath();
             this.drawTouch(mouseX, mouseY);
-            
-            console.log(this.painting);
         });
   
         this.canvasElement.addEventListener('touchmove', (e) => {
             this.painting = true;
             e.preventDefault();
-            while(this.painting == true) {
-                const mouseX = e.changedTouches[0].clientX - veloCanvas.canvasElement.getBoundingClientRect().left;
-                const mouseY = e.changedTouches[0].clientY - veloCanvas.canvasElement.getBoundingClientRect().top;
-                this.drawTouch(mouseX, mouseY);
-                console.log(mouseX, mouseY);
-                if (mouseX < 0 || mouseX > 300 || mouseY < 0 || mouseY > 150) {
-                    this.stopDraw();
-                }
-                break;
-            }
+            const mouseX = e.changedTouches[0].clientX - veloCanvas.canvasElement.getBoundingClientRect().left;
+            const mouseY = e.changedTouches[0].clientY - veloCanvas.canvasElement.getBoundingClientRect().top;
+            this.drawTouch(mouseX, mouseY);
+
         });
         this.canvasElement.addEventListener("touchleave", this.stopDraw);
         this.canvasElement.addEventListener("touchend", this.stopDraw);
