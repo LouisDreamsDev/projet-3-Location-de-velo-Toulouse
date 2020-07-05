@@ -10,7 +10,7 @@ class CanvasModel {
         this.canvas = this.canvasElement.getContext('2d');
         this.clearButton = document.getElementById('clear-button');
         this.painting = false; // booleen qui enregistre si user dessine ou pas
-        //this.blankCanvas = this.canvasElement.toDataURL();
+        this.blankCanvas = this.canvasElement.toDataURL();
         this.canvasError = document.getElementById('canvasErrorMsg');
         this.listenSignature();
 

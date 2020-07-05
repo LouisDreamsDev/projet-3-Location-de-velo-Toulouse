@@ -69,7 +69,7 @@ class ResaModel {
 
     }
     checkCanvas() {
-        if(veloCanvas.canvas.toDataURL() == veloCanvas.blankCanvas) { // compare un canvas blanc superposée. si le canvas est vide, affiche un message error.
+        if(veloCanvas.canvasElement.toDataURL() == veloCanvas.blankCanvas) { // compare un canvas blanc superposée. si le canvas est vide, affiche un message error.
             veloCanvas.canvasError.style.display='block';
         }
         else {
