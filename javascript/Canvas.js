@@ -61,7 +61,6 @@ class CanvasModel {
             const mouseX = e.changedTouches[0].clientX - veloCanvas.canvasElement.getBoundingClientRect().left;
             const mouseY = e.changedTouches[0].clientY - veloCanvas.canvasElement.getBoundingClientRect().top;
             this.drawTouch(mouseX, mouseY);
-
         });
         this.canvasElement.addEventListener("touchleave", this.stopDraw);
         this.canvasElement.addEventListener("touchend", this.stopDraw);
